@@ -3,22 +3,22 @@ package com.kuganappa.wishlist.model;
 import java.util.List;
 
 public class Wishlist {
-    private final int wishListId;
+    private final int wishlistId;
     private String wishlistName;
-    private User ownerName;
+    private String ownerName;
     private String description;
     private List<Wish> wishes;
 
-    public Wishlist(int wishListId, String wishlistName, User ownerName, String description, List<Wish> wishes) {
-        this.wishListId = wishListId;
+    public Wishlist(int wishlistId, String wishlistName, String ownerName, String description, List<Wish> wishes) {
+        this.wishlistId = wishlistId;
         this.wishlistName = wishlistName;
         this.ownerName = ownerName;
         this.description = description;
         this.wishes = wishes;
     }
 
-    public int getWishListId() {
-        return wishListId;
+    public int getWishlistId() {
+        return wishlistId;
     }
 
     public String getWishlistName() {
@@ -29,11 +29,11 @@ public class Wishlist {
         this.wishlistName = wishlistName;
     }
 
-    public User getOwnerName() {
+    public String getOwnerName() {
         return ownerName;
     }
 
-    public void setOwnerName(User ownerName) {
+    public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
     }
 

@@ -6,15 +6,15 @@ public class Wish {
     private String description;
     private double price;
     private String pictureLink;
-    private String link;
+    private String purchaseLink;
 
-    public Wish(int wishId, String wishName, String description, double price, String pictureLink, String link) {
+    public Wish(int wishId, String wishName, String description, double price, String pictureLink, String purchaseLink) {
         this.wishId = wishId;
         this.wishName = wishName;
         this.description = description;
         this.price = price;
         this.pictureLink = pictureLink;
-        this.link = link;
+        this.purchaseLink = purchaseLink;
     }
 
     public int getWishId() {
@@ -53,11 +53,11 @@ public class Wish {
         this.pictureLink = pictureLink;
     }
 
-    public String getLink() {
-        return link;
+    public String getPurchaseLink() {
+        return purchaseLink;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setPurchaseLink(String purchaseLink) {
+        this.purchaseLink = purchaseLink;
     }
 }

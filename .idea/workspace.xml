@@ -4,14 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34c88bf4-bf81-4cb1-8f4e-128484e3de3d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/Wish.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/Wishlist.java" afterDir="false" />
+    <list default="true" id="34c88bf4-bf81-4cb1-8f4e-128484e3de3d" name="Changes" comment="added folder structure and setters and getters for wishlist, wish and user">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wishlist/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Wishlist/pom.xml" afterDir="false" />
     </list>
-    <list id="b476445f-4b70-4aac-86e4-9218e73d1f40" name="Changes by frederikullersted" comment="" />
-    <list id="ee2a8f1e-0b95-4966-8a7a-922b67775552" name="Changes by Thor" comment="" />
+    <list id="b476445f-4b70-4aac-86e4-9218e73d1f40" name="Changes by frederikullersted" comment="">
+      <change beforePath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/Wish.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/Wish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/Wishlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/Wishlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/repository/WishlistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/repository/WishlistRepository.java" afterDir="false" />
+    </list>
+    <list id="ad41db45-f8b8-427a-a5a9-a8ccdba37423" name="Changes by Thor" comment="">
+      <change beforePath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/WishlistApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/WishlistApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/Wishlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/Wishlist.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +44,18 @@
     "accountId": "76a84c1a-25db-46b7-9f0f-334c8be74f83"
   }
 }]]></component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/Wishlist/src/main/java/com/kuganappa/wishlist/model/Wishlist.java">
+      <ranges>
+        <range start1="5" end1="6" start2="5" end2="6" changelist="ad41db45-f8b8-427a-a5a9-a8ccdba37423" />
+        <range start1="7" end1="8" start2="7" end2="8" changelist="b476445f-4b70-4aac-86e4-9218e73d1f40" />
+        <range start1="11" end1="13" start2="11" end2="13" changelist="ad41db45-f8b8-427a-a5a9-a8ccdba37423" />
+        <range start1="19" end1="21" start2="19" end2="21" changelist="ad41db45-f8b8-427a-a5a9-a8ccdba37423" />
+        <range start1="31" end1="32" start2="31" end2="32" changelist="b476445f-4b70-4aac-86e4-9218e73d1f40" />
+        <range start1="35" end1="36" start2="35" end2="36" changelist="b476445f-4b70-4aac-86e4-9218e73d1f40" />
+      </ranges>
+    </file>
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 3
 }]]></component>
@@ -87,11 +104,41 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1761046161209</updated>
-      <workItem from="1761046162563" duration="609000" />
+      <workItem from="1761046162563" duration="3210000" />
     </task>
+    <task id="LOCAL-00001" summary="added folder structure and setters and getters for wishlist, wish and user">
+      <option name="closed" value="true" />
+      <created>1761046903622</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761046903622</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added folder structure and setters and getters for wishlist, wish and user">
+      <option name="closed" value="true" />
+      <created>1761047042582</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761047042582</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changes by Thor">
+      <option name="closed" value="true" />
+      <created>1761047060513</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761047060513</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added folder structure and setters and getters for wishlist, wish and user" />
+    <MESSAGE value="Changes by Thor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by Thor" />
   </component>
 </project>
