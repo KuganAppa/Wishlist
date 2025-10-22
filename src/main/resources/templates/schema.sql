@@ -1,37 +1,32 @@
--- CREATE TABLE IF NOT EXISTS tag (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     name VARCHAR(50) UNIQUE NOT NULL
--- );
---
--- CREATE TABLE IF NOT EXISTS tourist_attraction (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     name VARCHAR(100) NOT NULL,
---     description TEXT,
---     city VARCHAR(100)
--- );
---
--- CREATE TABLE IF NOT EXISTS attraction_tag (
---     attraction_id INT NOT NULL,
---     tag_id INT NOT NULL,
---     PRIMARY KEY (attraction_id, tag_id),
---     FOREIGN KEY (attraction_id) REFERENCES tourist_attraction(id) ON DELETE CASCADE,
---     FOREIGN KEY (tag_id) REFERENCES tag(id)
--- );
+CREATE TABLE IF NOT EXISTS users (
+    userId INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    dateOfBirth DATE NOT NULL
+);
 
-
-CREATE TABLE IF NOT EXIST wish (
+CREATE TABLE IF NOT EXISTS wish (
     wishId INT AUTO_INCREMENT PRIMARY KEY,
     wishName VARCHAR(50) UNIQUE NOT NULL,
-    description TEXT,
-    price FLOAT(1000,2),
-    pictureLink TEXT,
-    purchaselink TEXT
+    description TEXT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    pictureLink TEXT NOT NULL,
+    purchaseLink TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXIST wishlist(
-
+CREATE TABLE IF NOT EXISTS wishlist (
+    wishlistId INT AUTO_INCREMENT PRIMARY KEY,
+    wishlistName VARCHAR(50) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    ownerId TEXT NOT NULL,
+    FOREIGN KEY (ownerId) REFERENCES users(userId) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXIST user (
-
+CREATE TABLE IF NOT EXISTS wishlist_wishes (
+    wishlistId INT NOT NULL,
+    wishId INT NOT NULL,
+    PRIMARY KEY (wishlistId, wishId),
+    FOREIGN KEY (wishlistId) REFERENCES wishlist(wishlistId) ON DELETE CASCADE,
+    FOREIGN KEY (wishId) REFERENCES wish(wishId) ON DELETE CASCADE
 );

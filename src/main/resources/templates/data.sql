@@ -1,21 +1,16 @@
--- INSERT INTO tag (name)
--- VALUES ('KUNST'),
---        ('MUSEUM'),
---        ('NATUR'),
---        ('BØRNEVENLIG'),
---        ('GRATIS');
---
--- INSERT INTO tourist_attraction (name, description, city)
--- VALUES ('SMK', 'Museum for Kunst', 'København'),
---        ('Odense Zoo', 'TEST123', 'Odense'),
--- --        ('Odense Zoo', 'Europas bedste zoo', 'Odense'),
---        ('Dyrehaven', 'Naturpark med skovområder', 'Kongens Lyngby'),
---        ('Tivoli', 'Forlystelsespark midt i Københavns centrum', 'København');
---
--- INSERT INTO attraction_tag (attraction_id, tag_id)
--- VALUES (1, 1), -- SMK -> KUNST
---        (1, 2), -- SMK -> MUSEUM
---        (2, 4), -- Odense Zoo -> BØRNEVENLIG
---        (3, 3), -- Dyrehaven -> NATUR
---        (3, 5), -- Dyrehaven -> GRATIS
---        (4, 4); -- Tivoli -> BØRNEVENLIG
+INSERT INTO wish (wishName, description, price, pictureLink, purchaseLink)
+VALUES ('PlayStation 5', 'Spillekonsol', '4000', null, null),
+       ('Barbie', 'Dukke', '200', null, null),
+       ('iPhone 16', 'Smartphone', '8000', null, null),
+       ('GitHub CoPilot', 'Coding Assistant', '100', null, null),
+       ('Ramme Coca Cola', 'Drikkevarer', '69', null, null)
+
+INSERT INTO wishList (wishListName, ownerName, description, wishes)
+VALUES ('Fødselsdagsønsker', 'Osman Git', 'Osmans ønskeliste til hans fødselsdag', 'GitHub CoPilot, PlayStation 5, Barbie'),
+       ('Juleønsker', 'Oskar Cola', 'Ved i hvad farve julemanden er? Samme farve som coca cola', 'Ramme Coca Cola'),
+       ('Mor og far skilsmisse ønsker', 'Osman daddy', 'Mette Minkdraeber', '')
+
+INSERT INTO user (name, email, password, dateOfBirth)
+VALUES ('Osman Git', 'osman@github.com', 'osman123', 21-10-1993),
+       ('Oskar Cola', 'oskar@cocacola.com', 'jegelskercola', 05-03-1953),
+       ('Kugan Appa', 'kugan-appa@ceomail.com', 'skejs123', 02-08-1954)
