@@ -5,14 +5,14 @@ import java.util.List;
 public class Wishlist {
     private final int wishlistId;
     private String wishlistName;
-    private String ownerName;
+    private int ownerId;
     private String description;
     private List<Wish> wishes;
 
-    public Wishlist(int wishlistId, String wishlistName, String ownerName, String description, List<Wish> wishes) {
+    public Wishlist(int wishlistId, String wishlistName, int ownerId, String description, List<Wish> wishes) {
         this.wishlistId = wishlistId;
         this.wishlistName = wishlistName;
-        this.ownerName = ownerName;
+        this.ownerId = ownerId;
         this.description = description;
         this.wishes = wishes;
     }
@@ -29,12 +29,12 @@ public class Wishlist {
         this.wishlistName = wishlistName;
     }
 
-    public String getOwnerName() {
-        return ownerName;
+    public int getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getDescription() {

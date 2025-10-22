@@ -16,21 +16,19 @@ public class WishlistRepository {
         this.jdbc = jdbc;
     }
 
-    private final RowMapper<Wishlist> rowMapper = (rs, rowNum) ->
-            new Wishlist(
-                    rs.getInt("wishlistId"),
-                    rs.getString("wishlistName"),
-                    rs.getString("ownerName"),
-                    rs.getString("description"),
-                    getWishesForWishlist(rs.getInt("id"))
-            );
+//    private final RowMapper<Wishlist> rowMapper = (rs, rowNum) ->
+//            new Wishlist(
+//                    rs.getInt("wishlistId"),
+//                    rs.getString("wishlistName"),
+//                    rs.getString("ownerName"),
+//                    rs.getString("description"),
+//                    getWishesForWishlist(rs.getInt("id"))
+//            );
 
 
-    private List<Wish> getWishesForWishlist(int wishlistId) {
+//    private List<Wish> getWishesForWishlist(int wishlistId) {
 //        return jdbc.query("SELECT t.name FROM tag t JOIN attraction_tag at ON t.id = at.tag_id WHERE at.attraction_id = ?",
 //                (rs, rowNum) -> Tag.valueOf(rs.getString("name")), attractionId);
 //    }
-    }
-
-//public List<String> getCities() {
-//  return jdbc.query("SELECT DISTINCT city FROM tourist_attraction", (rs, i) -> rs.getString("city"));
+//    }
+}
