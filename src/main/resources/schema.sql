@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS wishlist_wishes;
+DROP TABLE IF EXISTS wishlist;
+DROP TABLE IF EXISTS wish;
+DROP TABLE IF EXISTS users;
+
+
 CREATE TABLE IF NOT EXISTS users (
     userId INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -11,15 +17,17 @@ CREATE TABLE IF NOT EXISTS wish (
     wishName VARCHAR(50) UNIQUE NOT NULL,
     description TEXT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
-    pictureLink TEXT NOT NULL,
-    purchaseLink TEXT NOT NULL
+    pictureLink TEXT,
+    purchaseLink TEXT
 );
 
 CREATE TABLE IF NOT EXISTS wishlist (
     wishlistId INT AUTO_INCREMENT PRIMARY KEY,
     wishlistName VARCHAR(50) UNIQUE NOT NULL,
     description TEXT NOT NULL,
-    ownerId TEXT NOT NULL,
+    ownerName TEXT NOT NULL,
+    ownerId INT NOT NULL,
+    wishes TEXT,
     FOREIGN KEY (ownerId) REFERENCES users(userId) ON DELETE CASCADE
 );
 
