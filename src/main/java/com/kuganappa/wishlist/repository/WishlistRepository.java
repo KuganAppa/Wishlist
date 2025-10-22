@@ -30,8 +30,7 @@ public class WishlistRepository {
 //        return jdbc.query("SELECT t.name FROM tag t JOIN attraction_tag at ON t.id = at.tag_id WHERE at.attraction_id = ?",
 //                (rs, rowNum) -> Tag.valueOf(rs.getString("name")), attractionId);
 //    }
-}
+    }
 
 //public List<String> getCities() {
 //  return jdbc.query("SELECT DISTINCT city FROM tourist_attraction", (rs, i) -> rs.getString("city"));
-//}
