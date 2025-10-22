@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
-/*
+
 @Repository
 public class WishlistRepository {
     private final JdbcTemplate jdbc;
@@ -34,4 +34,3 @@ public class WishlistRepository {
 
 //public List<String> getCities() {
 //  return jdbc.query("SELECT DISTINCT city FROM tourist_attraction", (rs, i) -> rs.getString("city"));
-*/
