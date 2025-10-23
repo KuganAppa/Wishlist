@@ -3,30 +3,33 @@ package com.kuganappa.wishlist.model;
 import java.time.LocalDate;
 
 public class User {
-    private final int userId;
-    private String name;
+    private  int userId;
+    private String userName;
     private String email;
     private String password;
     private final LocalDate dateOfBirth;
 
-    public User(int userId, String name, String email, String password, LocalDate dateOfBirth) {
-        this.userId = userId;
-        this.name = name;
+    public User(String userName, String email, String password, LocalDate dateOfBirth) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setUserId(int userId){
+        this.userId = userId;
     }
 
     public int getUserId() {
         return userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.userName = name;
     }
 
     public String getEmail() {
@@ -47,5 +50,16 @@ public class User {
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                '}';
     }
 }

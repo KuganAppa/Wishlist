@@ -1,9 +1,9 @@
 -- 1. Users først
-INSERT INTO users (name, email, password, dateOfBirth)
+INSERT INTO users (userName, email, password, dateOfBirth)
 VALUES ('Osman Git', 'osman@github.com', 'osman123', '1993-10-21'),
        ('Oskar Cola', 'oskar@cocacola.com', 'jegelskercola', '1953-05-03'),
        ('Kugan Appa', 'kugan-appa@ceomail.com', 'skejs123', '1954-02-08')
-        ON DUPLICATE KEY UPDATE name=name;
+        ON DUPLICATE KEY UPDATE userName=userName;
 
 -- 2. Wishes
 INSERT INTO wish (wishName, description, price, pictureLink, purchaseLink)
@@ -15,4 +15,4 @@ VALUES ('PlayStation 5', 'Spillekonsol', 4000.00, null, null),
 
 -- 3. Wishlist hej test
 INSERT INTO wishlist (wishlistName, description, ownerName, ownerId, wishes)
-VALUES ('Fødselsdagsønsker','Osmans ønskeliste til hans fødselsdag', 'Osman Git', 1,'GitHub CoPilot, PlayStation 5, Barbie');
+VALUES ('Fødselsdagsønsker','Osmans ønskeliste til hans fødselsdag', 'Osman Git', 1,'GitHub CoPilot,PlayStation 5,Barbie');
