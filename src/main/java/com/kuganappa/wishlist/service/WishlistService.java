@@ -1,5 +1,6 @@
 package com.kuganappa.wishlist.service;
 
+import com.kuganappa.wishlist.model.User;
 import com.kuganappa.wishlist.repository.WishlistRepository;
 import org.springframework.stereotype.Service;
 

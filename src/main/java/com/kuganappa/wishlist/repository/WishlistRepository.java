@@ -1,5 +1,6 @@
 package com.kuganappa.wishlist.repository;
 
+import com.kuganappa.wishlist.model.User;
 import com.kuganappa.wishlist.model.Wish;
 import com.kuganappa.wishlist.model.Wishlist;
 import org.springframework.jdbc.core.RowMapper;
