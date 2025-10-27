@@ -3,7 +3,7 @@ package com.kuganappa.wishlist.model;
 import java.time.LocalDate;
 
 public class User {
-    private  int userId;
+    private int userId;
     private String userName;
     private String email;
     private String password;
