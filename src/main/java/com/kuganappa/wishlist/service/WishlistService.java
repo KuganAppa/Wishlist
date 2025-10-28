@@ -11,5 +11,4 @@ public class WishlistService {
     public WishlistService(WishlistRepository wishlistRepository) {
         this.wishlistRepository = wishlistRepository;
     }
-
 }

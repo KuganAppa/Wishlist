@@ -1,15 +1,14 @@
 package com.kuganappa.wishlist.model;
 
 public class Wish {
-    private final int wishId;
+    private int wishId;
     private String wishName;
     private String description;
     private double price;
     private String pictureLink;
     private String purchaseLink;
 
-    public Wish(int wishId, String wishName, String description, double price, String pictureLink, String purchaseLink) {
-        this.wishId = wishId;
+    public Wish(String wishName, String description, double price, String pictureLink, String purchaseLink) {
         this.wishName = wishName;
         this.description = description;
         this.price = price;
@@ -19,6 +18,10 @@ public class Wish {
 
     public int getWishId() {
         return wishId;
+    }
+
+    public void setWishId(int wishId) {
+        this.wishId = wishId;
     }
 
     public String getWishName() {

@@ -1,0 +1,76 @@
+package com.kuganappa.wishlist.repository;
+
+import com.kuganappa.wishlist.model.Wish;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.List;
+
+@Repository
+public class WishRepository {
+    private final JdbcTemplate jdbc;
+
+    public WishRepository(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
+    }
+
+    private final RowMapper<Wish> rowMapper = (rs, rowNum) ->
+            new Wish(
+                    rs.getString("wishName"),
+                    rs.getString("description"),
+                    rs.getDouble("price"),
+                    rs.getString("pictureLink"),
+                    rs.getString("purchaseLink")
+            );
+
+    public List<Wish> getWishes() {
+        return jdbc.query("SELECT * FROM wish", rowMapper);
+    }
+
+    public Wish getWishFromName(String wishName) {
+        List<Wish> wishes = jdbc.query("SELECT * FROM wish WHERE wishName = ?", rowMapper, wishName);
+        return wishes.isEmpty() ? null : wishes.getFirst();
+    }
+
+    public int createWish(Wish wish) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbc.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO wish (wishName, description, price, pictureLink, purchaseLink) VALUES (?, ?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            ps.setString(1, wish.getWishName());
+            ps.setString(2, wish.getDescription());
+            ps.setDouble(3, wish.getPrice());
+            ps.setString(4, wish.getPictureLink());
+            ps.setString(5, wish.getPurchaseLink());
+            return ps;
+        }, keyHolder);
+
+        Number id = keyHolder.getKey();
+        if (id != null) {
+            wish.setWishId(id.intValue());
+            return id.intValue();
+        }
+        throw new RuntimeException("Failed to generate ID for wish");
+    }
+
+    public void deleteWish(String wishName) {
+        jdbc.update("DELETE FROM wish WHERE wishName = ?", wishName);
+    }
+
+    public void updateWish(Wish wish) {
+        jdbc.update("UPDATE wish SET description = ?, price = ?, pictureLink = ?, purchaseLink = ? WHERE wishName = ?",
+                wish.getDescription(),
+                wish.getPrice(),
+                wish.getPictureLink(),
+                wish.getPurchaseLink(),
+                wish.getWishName()
+                );
+    }
+}
