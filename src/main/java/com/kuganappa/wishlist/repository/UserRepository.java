@@ -59,6 +59,14 @@ public class UserRepository {
         return list.isEmpty() ? null : list.getFirst();
     }
 
+    public User getUserFromId(int userId) {
+        List<User> list = jdbc.query(
+                "SELECT * FROM users WHERE userId = ?", rowMapper, userId);
+        return list.isEmpty() ? null : list.getFirst();
+    }
+
+
+
 
 
 

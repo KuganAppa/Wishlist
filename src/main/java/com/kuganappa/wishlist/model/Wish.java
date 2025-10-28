@@ -16,6 +16,9 @@ public class Wish {
         this.purchaseLink = purchaseLink;
     }
 
+    public Wish() {
+    }
+
     public int getWishId() {
         return wishId;
     }

@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS wish (
     price DECIMAL(10,2) NOT NULL,
     pictureLink TEXT,
     purchaseLink TEXT
+
+
 );
 
 CREATE TABLE IF NOT EXISTS wishlist (
@@ -27,7 +29,6 @@ CREATE TABLE IF NOT EXISTS wishlist (
     description TEXT NOT NULL,
     ownerName TEXT NOT NULL,
     ownerId INT NOT NULL,
-    wishes TEXT,
     FOREIGN KEY (ownerId) REFERENCES users(userId) ON DELETE CASCADE
 );
 

@@ -1,5 +1,6 @@
 package com.kuganappa.wishlist.service;
 
+import com.kuganappa.wishlist.model.Wish;
 import com.kuganappa.wishlist.repository.WishRepository;
 
 public class WishService {
@@ -8,4 +9,8 @@ public class WishService {
         public WishService(WishRepository wishRepository) {
             this.wishRepository = wishRepository;
         }
+
+    public void createWish(Wish wish) {
+            wishRepository.createWish(wish);
+    }
 }

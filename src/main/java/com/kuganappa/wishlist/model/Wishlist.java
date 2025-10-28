@@ -17,6 +17,9 @@ public class Wishlist {
         this.wishes = wishes;
     }
 
+    public Wishlist() {
+    }
+
     public int getWishlistId() {
         return wishlistId;
     }
@@ -51,5 +54,8 @@ public class Wishlist {
 
     public void setWishes(List<Wish> wishes) {
         this.wishes = wishes;
+    }
+
+    public void setWishlistId(int i) {
     }
 }
