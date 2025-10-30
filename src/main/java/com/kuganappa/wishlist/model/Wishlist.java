@@ -17,6 +17,8 @@ public class Wishlist {
         this.wishes = wishes;
     }
 
+
+
     public Wishlist() {
     }
 
@@ -46,14 +48,6 @@ public class Wishlist {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Wish> getWishes() {
-        return wishes;
-    }
-
-    public void setWishes(List<Wish> wishes) {
-        this.wishes = wishes;
     }
 
     public void setWishlistId(int i) {

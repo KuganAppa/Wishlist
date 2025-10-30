@@ -1,13 +1,10 @@
 package com.kuganappa.wishlist.repository;
 
-import com.kuganappa.wishlist.model.User;
 import com.kuganappa.wishlist.model.Wish;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import com.kuganappa.wishlist.repository.WishRowMapper;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -16,6 +13,7 @@ import java.util.List;
 @Repository
 public class WishRepository {
     private final JdbcTemplate jdbc;
+    private final WishRowMapper wishRowMapper = new WishRowMapper();
 
     public WishRepository(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
@@ -45,18 +43,18 @@ public class WishRepository {
     }
 
     public List<Wish> getWishes() {
-        return jdbc.query("SELECT * FROM wish", rowMapper);
+        return jdbc.query("SELECT * FROM wish", wishRowMapper);
     }
 
     public Wish getWishFromName(String wishName) {
-        List<Wish> wishes = jdbc.query("SELECT * FROM wish WHERE wishName = ?", rowMapper, wishName);
+        List<Wish> wishes = jdbc.query("SELECT * FROM wish WHERE wishName = ?", wishRowMapper, wishName);
         return wishes.isEmpty() ? null : wishes.getFirst();
     }
 
 
     public Wish getWishFromWishId(int wishId) {
         List<Wish> list = jdbc.query(
-                "SELECT * FROM wish WHERE wishId = ?", rowMapper, wishId);
+                "SELECT * FROM wish WHERE wishId = ?", wishRowMapper, wishId);
         return list.isEmpty() ? null : list.getFirst();
     }
 
