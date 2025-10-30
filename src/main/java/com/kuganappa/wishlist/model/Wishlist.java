@@ -1,18 +1,19 @@
 package com.kuganappa.wishlist.model;
 
 import java.util.List;
+import java.util.SequencedCollection;
 
 public class Wishlist {
-    private final int wishlistId;
+    private int wishlistId;
     private String wishlistName;
-    private int ownerId;
+    private User owner;
     private String description;
     private List<Wish> wishes;
 
-    public Wishlist(int wishlistId, String wishlistName, int ownerId, String description, List<Wish> wishes) {
+    public Wishlist(int wishlistId, String wishlistName, User owner, String description, List<Wish> wishes) {
         this.wishlistId = wishlistId;
         this.wishlistName = wishlistName;
-        this.ownerId = ownerId;
+        this.owner = owner;
         this.description = description;
         this.wishes = wishes;
     }
@@ -22,8 +23,12 @@ public class Wishlist {
     public Wishlist() {
     }
 
+
     public int getWishlistId() {
         return wishlistId;
+    }
+
+    public void setWishlistId(int i) {
     }
 
     public String getWishlistName() {
@@ -34,12 +39,12 @@ public class Wishlist {
         this.wishlistName = wishlistName;
     }
 
-    public int getOwnerId() {
-        return ownerId;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getDescription() {
@@ -50,6 +55,8 @@ public class Wishlist {
         this.description = description;
     }
 
-    public void setWishlistId(int i) {
+    public List<Wish> getWishes() {
+        return wishes;
     }
+
 }

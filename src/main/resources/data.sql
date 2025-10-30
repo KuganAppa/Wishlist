@@ -14,5 +14,10 @@ VALUES ('PlayStation 5', 'Spillekonsol', 4000.00, null, null),
        ('Ramme Coca Cola', 'Drikkevarer', 69.00, null, null);
 
 -- 3. Wishlist hej test
-INSERT INTO wishlist (wishlistName, description, ownerName, ownerId, wishes)
-VALUES ('Fødselsdagsønsker','Osmans ønskeliste til hans fødselsdag', 'Osman Git', 1,'GitHub CoPilot,PlayStation 5,Barbie');
+INSERT INTO wishlist (wishlistName, description,  ownerId)
+VALUES ('Fødselsdagsønsker','Osmans ønskeliste til hans fødselsdag', 1),
+        ('Fdagsønsker', 'Osmans asdasdsasdas til hans fødselsdag', 2);
+
+-- 4. wishlist wishes
+INSERT INTO wishlist_wishes (wishlistId, wishId)
+VALUES (1,1)

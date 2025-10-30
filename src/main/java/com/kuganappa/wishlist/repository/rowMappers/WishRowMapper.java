@@ -1,4 +1,4 @@
-package com.kuganappa.wishlist.repository;
+package com.kuganappa.wishlist.repository.rowMappers;
 
 import com.kuganappa.wishlist.model.Wish;
 import org.springframework.jdbc.core.RowMapper;

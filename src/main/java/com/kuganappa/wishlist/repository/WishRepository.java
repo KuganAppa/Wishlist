@@ -1,6 +1,7 @@
 package com.kuganappa.wishlist.repository;
 
 import com.kuganappa.wishlist.model.Wish;
+import com.kuganappa.wishlist.repository.rowMappers.WishRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;

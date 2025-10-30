@@ -7,8 +7,13 @@ import com.kuganappa.wishlist.service.UserService;
 import com.kuganappa.wishlist.service.WishService;
 import com.kuganappa.wishlist.service.WishlistService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+
 public class WishlistController {
     private final WishlistService wishlistService;
     private final UserService userService;
@@ -19,6 +24,32 @@ public class WishlistController {
         this.userService = userService;
         this.wishService = wishService;
     }
+
+    @GetMapping("mypage/{wishlistId}")
+    public String showSpecificWishlist(@PathVariable int wishlistId, Model model){
+        model.addAttribute("wishlist",wishlistService.getSpecificWishlist(wishlistId));
+        return "myWishlistPage";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void createUser (User user){
         userService.createUser(user);

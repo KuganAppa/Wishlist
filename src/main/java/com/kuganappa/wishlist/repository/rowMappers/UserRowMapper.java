@@ -1,8 +1,6 @@
-package com.kuganappa.wishlist.repository;
+package com.kuganappa.wishlist.repository.rowMappers;
 
 import com.kuganappa.wishlist.model.User;
-import com.mysql.cj.protocol.Resultset;
-import org.springframework.cglib.core.Local;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
