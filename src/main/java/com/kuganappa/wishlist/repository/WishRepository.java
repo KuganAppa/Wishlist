@@ -2,7 +2,6 @@ package com.kuganappa.wishlist.repository;
 
 import com.kuganappa.wishlist.model.Wish;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -14,27 +13,10 @@ import java.util.List;
 @Repository
 public class WishRepository {
     private final JdbcTemplate jdbc;
+    private final WishRowMapper wishRowMapper = new WishRowMapper();
 
     public WishRepository(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
-    }
-
-    private final RowMapper<Wish> rowMapper = (rs, rowNum) ->
-            new Wish(
-                    rs.getString("wishName"),
-                    rs.getString("description"),
-                    rs.getDouble("price"),
-                    rs.getString("pictureLink"),
-                    rs.getString("purchaseLink")
-            );
-
-    public List<Wish> getWishes() {
-        return jdbc.query("SELECT * FROM wish", rowMapper);
-    }
-
-    public Wish getWishFromName(String wishName) {
-        List<Wish> wishes = jdbc.query("SELECT * FROM wish WHERE wishName = ?", rowMapper, wishName);
-        return wishes.isEmpty() ? null : wishes.getFirst();
     }
 
     public int createWish(Wish wish) {
@@ -59,6 +41,23 @@ public class WishRepository {
         }
         throw new RuntimeException("Failed to generate ID for wish");
     }
+
+    public List<Wish> getWishes() {
+        return jdbc.query("SELECT * FROM wish", wishRowMapper);
+    }
+
+    public Wish getWishFromName(String wishName) {
+        List<Wish> wishes = jdbc.query("SELECT * FROM wish WHERE wishName = ?", wishRowMapper, wishName);
+        return wishes.isEmpty() ? null : wishes.getFirst();
+    }
+
+
+    public Wish getWishFromWishId(int wishId) {
+        List<Wish> list = jdbc.query(
+                "SELECT * FROM wish WHERE wishId = ?", wishRowMapper, wishId);
+        return list.isEmpty() ? null : list.getFirst();
+    }
+
 
     public void deleteWish(String wishName) {
         jdbc.update("DELETE FROM wish WHERE wishName = ?", wishName);

@@ -7,13 +7,17 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    private final LocalDate dateOfBirth;
+    private LocalDate dateOfBirth;
 
     public User(String userName, String email, String password, LocalDate dateOfBirth) {
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public User() {
+
     }
 
     public void setUserId(int userId){
@@ -28,7 +32,7 @@ public class User {
         return userName;
     }
 
-    public void setName(String name) {
+    public void setUserName(String name) {
         this.userName = name;
     }
 
@@ -50,6 +54,10 @@ public class User {
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth){
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override

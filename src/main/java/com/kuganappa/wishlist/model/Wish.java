@@ -1,5 +1,7 @@
 package com.kuganappa.wishlist.model;
 
+import java.util.List;
+
 public class Wish {
     private int wishId;
     private String wishName;
@@ -14,6 +16,9 @@ public class Wish {
         this.price = price;
         this.pictureLink = pictureLink;
         this.purchaseLink = purchaseLink;
+    }
+
+    public Wish() {
     }
 
     public int getWishId() {
