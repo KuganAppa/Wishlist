@@ -22,4 +22,8 @@ public class WishlistService {
     public Wishlist getSpecificWishlist (int wishlistId){
         return wishlistRepository.getSpecificWishlist(wishlistId);
     }
+
+    public Object allWishlistsForUser(int userId) {
+        return wishlistRepository.allWishlistsForUser(userId);
+    }
 }

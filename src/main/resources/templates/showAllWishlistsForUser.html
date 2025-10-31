@@ -6,7 +6,11 @@
   <title>My wishlist page</title>
 </head>
 <body>
-
-    <h1 th:text="${wishlist.wishlistName}">Wishlist Name Here</h1>
+<ul>
+    <li  th:each="wishlist : ${userWishlists}">
+        <span th:text="${wishlist.name}"></span>
+    </li>
+</ul>
+</ul>
 </body>
 </html>

@@ -73,4 +73,9 @@ public class WishlistRepository {
         String sql = "SELECT * FROM wishlist";
         return jdbc.query(sql, wishlistRowMapper);
     }
+
+    public List<Wishlist> allWishlistsForUser(int userId){
+        String sql = "SELECT * FROM wishlist WHERE userId = ?";
+        return jdbc.query(sql,wishlistRowMapper,userId);
+    }
 }
