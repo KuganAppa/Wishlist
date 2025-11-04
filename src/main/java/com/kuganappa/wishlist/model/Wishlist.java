@@ -31,7 +31,6 @@ public class Wishlist {
     public Wishlist() {
     }
 
-
     public int getWishlistId() {
         return wishlistId;
     }
