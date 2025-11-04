@@ -59,7 +59,6 @@ public class WishRepository {
         return list.isEmpty() ? null : list.getFirst();
     }
 
-
     public void deleteWish(String wishName) {
         jdbc.update("DELETE FROM wish WHERE wishName = ?", wishName);
     }
@@ -71,6 +70,6 @@ public class WishRepository {
                 wish.getPictureLink(),
                 wish.getPurchaseLink(),
                 wish.getWishName()
-                );
+        );
     }
 }

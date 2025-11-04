@@ -56,7 +56,7 @@ public class User {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth){
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
