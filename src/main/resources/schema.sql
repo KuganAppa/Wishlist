@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS wishlist (
     wishlistId INT AUTO_INCREMENT PRIMARY KEY,
     wishlistName VARCHAR(50) UNIQUE NOT NULL,
     description TEXT NOT NULL,
-    ownerName TEXT NOT NULL,
     ownerId INT NOT NULL,
     FOREIGN KEY (ownerId) REFERENCES users(userId) ON DELETE CASCADE
 );

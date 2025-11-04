@@ -1,30 +1,42 @@
 package com.kuganappa.wishlist.model;
 
 import java.util.List;
+import java.util.SequencedCollection;
 
 public class Wishlist {
-    private final int wishlistId;
+    private int wishlistId;
     private String wishlistName;
-    private int ownerId;
+    private User owner;
     private String description;
     private List<Wish> wishes;
 
-    public Wishlist(int wishlistId, String wishlistName, int ownerId, String description, List<Wish> wishes) {
+    public Wishlist(int wishlistId, String wishlistName, User owner, String description, List<Wish> wishes) {
         this.wishlistId = wishlistId;
         this.wishlistName = wishlistName;
-        this.ownerId = ownerId;
         this.description = description;
+        this.owner = owner;
         this.wishes = wishes;
     }
 
+    public Wishlist(String wishlistName, User owner, String description, List<Wish> wishes) {
+        this.wishlistName = wishlistName;
+        this.description = description;
+        this.owner = owner;
+        this.wishes = wishes;
+    }
 
+    public void setWishlistId(int wishlistId) {
+        this.wishlistId = wishlistId;
+    }
 
     public Wishlist() {
     }
 
+
     public int getWishlistId() {
         return wishlistId;
     }
+
 
     public String getWishlistName() {
         return wishlistName;
@@ -34,12 +46,12 @@ public class Wishlist {
         this.wishlistName = wishlistName;
     }
 
-    public int getOwnerId() {
-        return ownerId;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getDescription() {
@@ -50,6 +62,23 @@ public class Wishlist {
         this.description = description;
     }
 
-    public void setWishlistId(int i) {
+    public List<Wish> getWishes() {
+        return wishes;
     }
+
+    public void setWishes(List<Wish> wishes) {
+        this.wishes = wishes;
+    }
+
+    @Override
+    public String toString() {
+        return "Wishlist{" +
+                "wishlistId=" + wishlistId +
+                ", wishlistName='" + wishlistName + '\'' +
+                ", owner=" + (owner != null ? owner.getUserName() : "null") +
+                ", description='" + description + '\'' +
+                ", wishes=" + (wishes != null ? wishes.size() : 0) +
+                '}';
+    }
+
 }

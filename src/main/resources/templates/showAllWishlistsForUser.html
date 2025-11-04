@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="da">
+<head>
+    <meta charset="UTF-8">
+  <link th:href="@{/main.css}" rel="stylesheet">
+  <title>My wishlist page</title>
+</head>
+<body>
+<ul>
+    <li  th:each="wishlist : ${userWishlists}">
+        <span th:text="${wishlist.name}"></span>
+    </li>
+</ul>
+</ul>
+</body>
+</html>

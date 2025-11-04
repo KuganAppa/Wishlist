@@ -1,6 +1,8 @@
 package com.kuganappa.wishlist.repository;
 import com.kuganappa.wishlist.model.Wish;
 import com.kuganappa.wishlist.model.Wishlist;
+import com.kuganappa.wishlist.repository.rowMappers.WishRowMapper;
+import com.kuganappa.wishlist.repository.rowMappers.WishlistRowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -16,7 +18,7 @@ public class WishlistRepository {
     private final JdbcTemplate jdbc;
 
     private final WishRowMapper wishRowMapper = new WishRowMapper();
-    private final WishlistRowMapper wishlistRowMapper = new WishlistRowMapper(this);
+    private final WishlistRowMapper wishlistRowMapper = new WishlistRowMapper();
 
     public WishlistRepository(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
@@ -27,14 +29,16 @@ public class WishlistRepository {
 
         jdbc.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(
-                    "INSERT INTO wishlist (wishlistName, ownerId, description)" +
-                            " VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS
+                    "INSERT INTO wishlist (wishlistName, description, ownerId) VALUES (?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
             );
             ps.setString(1, wishlist.getWishlistName());
-            ps.setInt(2, wishlist.getOwnerId());
-            ps.setString(3, wishlist.getDescription());
+            ps.setString(2, wishlist.getDescription());
+            ps.setInt(3, wishlist.getOwner().getUserId());
             return ps;
         }, keyHolder);
+
+
 
         Number id = keyHolder.getKey();
         if (id != null) {
@@ -42,9 +46,9 @@ public class WishlistRepository {
         }
     }
 
-    public void addWishToWishlist(int wishlistId, int wishId) {
-        String sql = "INSERT INTO wishlist_wishes (wishlistId, wishId) VALUES (?, ?)";
-        jdbc.update(sql, wishlistId, wishId);
+    public void addWishToWishlist(int wishId, int wishlistId) {
+        String sql = "INSERT INTO wishlist_wishes (wishId, wishlistId) VALUES (?, ?)";
+        jdbc.update(sql,wishId,wishlistId);
     }
 
     public List<Wish> getWishesFromWishlist(Integer wishlistId) {
@@ -57,8 +61,23 @@ public class WishlistRepository {
         return jdbc.query(sql, wishRowMapper, wishlistId);
     }
 
+    public Wishlist getSpecificWishlist(int wishlistId){
+        String sql ="""
+                SELECT *
+                from wishlist
+                WHERE wishlist.wishlistId = ?
+                """;
+        List <Wishlist> wishlist = jdbc.query(sql,wishlistRowMapper,wishlistId);
+        return wishlist.isEmpty() ? null : wishlist.get(0);
+    }
+
     public List<Wishlist> getAllWishlists() {
         String sql = "SELECT * FROM wishlist";
         return jdbc.query(sql, wishlistRowMapper);
+    }
+
+    public List<Wishlist> allWishlistsForUser(int userId){
+        String sql = "SELECT * FROM wishlist WHERE userId = ?";
+        return jdbc.query(sql,wishlistRowMapper,userId);
     }
 }

@@ -28,7 +28,7 @@ public class UserRepository {
                 rs.getObject("dateOfBirth", LocalDate.class)
         );
 
-    public List<User> getUsers(){
+    public List<User> getAllUsers(){
         return jdbc.query("SELECT * FROM users", rowMapper);
     }
 

@@ -8,12 +8,13 @@ class WishlistTest {
 
     @Test
     void testWishlistConstructorAndGetters() {
+        User user = new User();
         Wish wish = new Wish("Book", "Java 101", 199.0, null, null);
-        Wishlist wishlist = new Wishlist(1, "Christmas wishlist", 2665, "For Christmas", List.of(wish));
+        Wishlist wishlist = new Wishlist(1, "Christmas wishlist", user, "For Christmas", List.of(wish));
 
         assertEquals(1, wishlist.getWishlistId());
         assertEquals("Christmas wishlist", wishlist.getWishlistName());
-        assertEquals(2665, wishlist.getOwnerId());
+        assertEquals(2665, wishlist.getOwner());
         assertEquals("For Christmas", wishlist.getDescription());
         assertEquals(wish, wishlist.getWishes().getFirst());
     }
