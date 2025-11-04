@@ -2,7 +2,6 @@ package com.kuganappa.wishlist.repository.rowMappers;
 
 import com.kuganappa.wishlist.model.User;
 import com.kuganappa.wishlist.model.Wishlist;
-import com.kuganappa.wishlist.repository.WishlistRepository;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -25,5 +24,5 @@ public class WishlistRowMapper implements RowMapper<Wishlist> {
         wishlist.setOwner(owner);
 
         return wishlist;
-    };
+    }
 }

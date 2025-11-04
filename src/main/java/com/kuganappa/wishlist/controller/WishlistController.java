@@ -25,18 +25,13 @@ public class WishlistController {
     }
 
     @GetMapping("")
-        public String entryPage(){
-            return "login";
-        }
+    public String entryPage() {
+        return "login";
+    }
 
-
-    //Login
+    // Login
     @PostMapping("/login")
-    public String login(@RequestParam String username,
-                        @RequestParam String password,
-                        HttpSession session,
-                        Model model) {
-
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         User user = userService.getUserFromName(username);
 
         if (user == null) {
@@ -44,8 +39,8 @@ public class WishlistController {
             return "login";
         }
 
-        if (password.equals(user.getPassword())) { // evt. bcrypt senere
-            session.setAttribute("user", user);    // gemmer user i session
+        if (password.equals(user.getPassword())) {
+            session.setAttribute("user", user);
             return "redirect:/wishy/homepage/" + user.getUserId();
         } else {
             model.addAttribute("error", "Forkert adgangskode");
@@ -53,75 +48,54 @@ public class WishlistController {
         }
     }
 
-
-
-    //Homepage
+    // Homepage
     @GetMapping("/homepage/{userId}")
     public String homepage(@PathVariable int userId, Model model) {
         model.addAttribute("user", userService.getUser(userId));
         return "homepage";
     }
 
-
-    //List of wishlist
+    // List of wishlist
     @GetMapping("{userId}/wishlists")
-    public String showAllWishlist(@PathVariable int userId, Model model){
-        model.addAttribute("usersLists",wishlistService.allWishlistsForUser(userId));
+    public String showAllWishlist(@PathVariable int userId, Model model) {
+        model.addAttribute("usersLists", wishlistService.allWishlistsForUser(userId));
         return "showAllWishlistsForUser";
     }
 
-    //Specific wishlist
+    // Specific wishlist
     @GetMapping("/wishlists/{wishlistId}")
-    public String showSpecificWishlist(@PathVariable int wishlistId, Model model){
-        model.addAttribute("wishlist",wishlistService.getSpecificWishlist(wishlistId));
+    public String showSpecificWishlist(@PathVariable int wishlistId, Model model) {
+        model.addAttribute("wishlist", wishlistService.getSpecificWishlist(wishlistId));
         return "showSpecificWishlist";
     }
 
-    //List of users
+    // List of users
     @GetMapping("/users")
-    public String showAllUsers(Model model){
-        model.addAttribute("users",userService.getAllUsers());
+    public String showAllUsers(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
         return "showUsers";
     }
-    //Specific user
+
+    // Specific user
     @GetMapping("/users/{userId}")
-    public String showSpecificUser(@PathVariable int userId, Model model){
-        model.addAttribute("user",userService.getUser(userId));
+    public String showSpecificUser(@PathVariable int userId, Model model) {
+        model.addAttribute("user", userService.getUser(userId));
         return "showSpecificUser";
     }
 
-    //list of wishes
+    // List of wishes
     @GetMapping("/wishes")
-    public String showWishes(Model model){
-        model.addAttribute("wishes",wishService.getWishes());
+    public String showWishes(Model model) {
+        model.addAttribute("wishes", wishService.getWishes());
         return "showWishes";
     }
 
-    //specific wish
+    // Specific wish
     @GetMapping("/wishes/{wishId}")
-    public String showWish(@PathVariable int wishId, Model model){
-        model.addAttribute("wish",wishService.getWish(wishId));
+    public String showWish(@PathVariable int wishId, Model model) {
+        model.addAttribute("wish", wishService.getWish(wishId));
         return "showSpecificWish";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @PostMapping("/users")
     public String createUser(@ModelAttribute User user) {
@@ -130,14 +104,14 @@ public class WishlistController {
     }
 
     @PostMapping("/wishes")
-    public String createWish(Wish wish){
+    public String createWish(Wish wish) {
         wishService.createWish(wish);
         return "redirect:/wishy/wishes";
     }
 
     @PostMapping("/wishlist")
-    public String createWishlist(Wishlist wishlist){
+    public String createWishlist(Wishlist wishlist) {
         wishlistService.createWishlist(wishlist);
-        return  "redirect:/wishy/wishlists";
+        return "redirect:/wishy/wishlists";
     }
 }
