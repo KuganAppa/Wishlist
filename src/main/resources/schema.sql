@@ -3,7 +3,6 @@ DROP TABLE IF EXISTS wishlist;
 DROP TABLE IF EXISTS wish;
 DROP TABLE IF EXISTS users;
 
-
 CREATE TABLE IF NOT EXISTS users (
     userId INT AUTO_INCREMENT PRIMARY KEY,
     userName VARCHAR(50) NOT NULL,
@@ -19,8 +18,6 @@ CREATE TABLE IF NOT EXISTS wish (
     price DECIMAL(10,2) NOT NULL,
     pictureLink TEXT,
     purchaseLink TEXT
-
-
 );
 
 CREATE TABLE IF NOT EXISTS wishlist (
