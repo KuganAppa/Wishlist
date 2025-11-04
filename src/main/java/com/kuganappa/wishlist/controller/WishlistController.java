@@ -26,7 +26,7 @@ public class WishlistController {
 
     @GetMapping("")
         public String entryPage(){
-            return "/login";
+            return "login";
         }
 
 
@@ -41,7 +41,7 @@ public class WishlistController {
 
         if (user == null) {
             model.addAttribute("error", "Brugernavn findes ikke");
-            return "wishy/login";
+            return "login";
         }
 
         if (password.equals(user.getPassword())) { // evt. bcrypt senere
@@ -49,7 +49,7 @@ public class WishlistController {
             return "redirect:/wishy/homepage/" + user.getUserId();
         } else {
             model.addAttribute("error", "Forkert adgangskode");
-            return "wishy/login";
+            return "login";
         }
     }
 
@@ -74,7 +74,7 @@ public class WishlistController {
     @GetMapping("/wishlists/{wishlistId}")
     public String showSpecificWishlist(@PathVariable int wishlistId, Model model){
         model.addAttribute("wishlist",wishlistService.getSpecificWishlist(wishlistId));
-        return "showAllWishlistsForUser";
+        return "showSpecificWishlist";
     }
 
     //List of users
@@ -123,15 +123,21 @@ public class WishlistController {
 
 
 
-    public void createUser (User user){
+    @PostMapping("/users")
+    public String createUser(@ModelAttribute User user) {
         userService.createUser(user);
+        return "redirect:/wishy/users";
     }
 
-    public void createWish(Wish wish){
+    @PostMapping("/wishes")
+    public String createWish(Wish wish){
         wishService.createWish(wish);
+        return "redirect:/wishy/wishes";
     }
 
-    public void createWishlist(Wishlist wishlist){
+    @PostMapping("/wishlist")
+    public String createWishlist(Wishlist wishlist){
         wishlistService.createWishlist(wishlist);
+        return  "redirect:/wishy/wishlists";
     }
 }

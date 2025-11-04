@@ -18,7 +18,7 @@ public class WishlistRepository {
     private final JdbcTemplate jdbc;
 
     private final WishRowMapper wishRowMapper = new WishRowMapper();
-    private final WishlistRowMapper wishlistRowMapper = new WishlistRowMapper(this);
+    private final WishlistRowMapper wishlistRowMapper = new WishlistRowMapper();
 
     public WishlistRepository(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
@@ -29,14 +29,16 @@ public class WishlistRepository {
 
         jdbc.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(
-                    "INSERT INTO wishlist (wishlistName, owner, description)" +
-                            " VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS
+                    "INSERT INTO wishlist (wishlistName, description, ownerId) VALUES (?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
             );
             ps.setString(1, wishlist.getWishlistName());
-            ps.setObject(2, wishlist.getOwner().getUserName());
-            ps.setString(3, wishlist.getDescription());
+            ps.setString(2, wishlist.getDescription());
+            ps.setInt(3, wishlist.getOwner().getUserId());
             return ps;
         }, keyHolder);
+
+
 
         Number id = keyHolder.getKey();
         if (id != null) {
@@ -44,9 +46,9 @@ public class WishlistRepository {
         }
     }
 
-    public void addWishToWishlist(int wishlistId, int wishId) {
-        String sql = "INSERT INTO wishlist_wishes (wishlistId, wishId) VALUES (?, ?)";
-        jdbc.update(sql, wishlistId, wishId);
+    public void addWishToWishlist(int wishId, int wishlistId) {
+        String sql = "INSERT INTO wishlist_wishes (wishId, wishlistId) VALUES (?, ?)";
+        jdbc.update(sql,wishId,wishlistId);
     }
 
     public List<Wish> getWishesFromWishlist(Integer wishlistId) {

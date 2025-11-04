@@ -10,12 +10,6 @@ import java.sql.SQLException;
 
 public class WishlistRowMapper implements RowMapper<Wishlist> {
 
-    private final WishlistRepository wishlistRepository;
-
-    public WishlistRowMapper(WishlistRepository wishlistRepository) {
-        this.wishlistRepository = wishlistRepository;
-    }
-
     @Override
     public Wishlist mapRow(ResultSet rs, int rowNum) throws SQLException {
         Wishlist wishlist = new Wishlist();

@@ -13,12 +13,21 @@ public class Wishlist {
     public Wishlist(int wishlistId, String wishlistName, User owner, String description, List<Wish> wishes) {
         this.wishlistId = wishlistId;
         this.wishlistName = wishlistName;
-        this.owner = owner;
         this.description = description;
+        this.owner = owner;
         this.wishes = wishes;
     }
 
+    public Wishlist(String wishlistName, User owner, String description, List<Wish> wishes) {
+        this.wishlistName = wishlistName;
+        this.description = description;
+        this.owner = owner;
+        this.wishes = wishes;
+    }
 
+    public void setWishlistId(int wishlistId) {
+        this.wishlistId = wishlistId;
+    }
 
     public Wishlist() {
     }
@@ -28,8 +37,6 @@ public class Wishlist {
         return wishlistId;
     }
 
-    public void setWishlistId(int i) {
-    }
 
     public String getWishlistName() {
         return wishlistName;
@@ -57,6 +64,21 @@ public class Wishlist {
 
     public List<Wish> getWishes() {
         return wishes;
+    }
+
+    public void setWishes(List<Wish> wishes) {
+        this.wishes = wishes;
+    }
+
+    @Override
+    public String toString() {
+        return "Wishlist{" +
+                "wishlistId=" + wishlistId +
+                ", wishlistName='" + wishlistName + '\'' +
+                ", owner=" + (owner != null ? owner.getUserName() : "null") +
+                ", description='" + description + '\'' +
+                ", wishes=" + (wishes != null ? wishes.size() : 0) +
+                '}';
     }
 
 }
