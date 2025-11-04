@@ -104,21 +104,7 @@ public class WishlistController {
         return "showSpecificWish";
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //add wish to wishlist
 
 
 
