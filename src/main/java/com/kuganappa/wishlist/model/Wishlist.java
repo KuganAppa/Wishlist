@@ -1,7 +1,6 @@
 package com.kuganappa.wishlist.model;
 
 import java.util.List;
-import java.util.SequencedCollection;
 
 public class Wishlist {
     private int wishlistId;
@@ -36,7 +35,6 @@ public class Wishlist {
     public int getWishlistId() {
         return wishlistId;
     }
-
 
     public String getWishlistName() {
         return wishlistName;
@@ -80,5 +78,4 @@ public class Wishlist {
                 ", wishes=" + (wishes != null ? wishes.size() : 0) +
                 '}';
     }
-
 }

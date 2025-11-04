@@ -1,12 +1,13 @@
 package com.kuganappa.wishlist.repository;
+
 import com.kuganappa.wishlist.model.Wish;
 import com.kuganappa.wishlist.model.Wishlist;
 import com.kuganappa.wishlist.repository.rowMappers.WishRowMapper;
 import com.kuganappa.wishlist.repository.rowMappers.WishlistRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -38,8 +39,6 @@ public class WishlistRepository {
             return ps;
         }, keyHolder);
 
-
-
         Number id = keyHolder.getKey();
         if (id != null) {
             wishlist.setWishlistId(id.intValue());
@@ -48,26 +47,26 @@ public class WishlistRepository {
 
     public void addWishToWishlist(int wishId, int wishlistId) {
         String sql = "INSERT INTO wishlist_wishes (wishId, wishlistId) VALUES (?, ?)";
-        jdbc.update(sql,wishId,wishlistId);
+        jdbc.update(sql, wishId, wishlistId);
     }
 
     public List<Wish> getWishesFromWishlist(Integer wishlistId) {
         String sql = """
-            SELECT w.*
-            FROM wish w
-            JOIN wishlist_wishes ww ON w.wishId = ww.wishId
-            WHERE ww.wishlistId = ?
-        """;
+                    SELECT w.*
+                    FROM wish w
+                    JOIN wishlist_wishes ww ON w.wishId = ww.wishId
+                    WHERE ww.wishlistId = ?
+                """;
         return jdbc.query(sql, wishRowMapper, wishlistId);
     }
 
-    public Wishlist getSpecificWishlist(int wishlistId){
-        String sql ="""
+    public Wishlist getSpecificWishlist(int wishlistId) {
+        String sql = """
                 SELECT *
                 from wishlist
                 WHERE wishlist.wishlistId = ?
                 """;
-        List <Wishlist> wishlist = jdbc.query(sql,wishlistRowMapper,wishlistId);
+        List<Wishlist> wishlist = jdbc.query(sql, wishlistRowMapper, wishlistId);
         return wishlist.isEmpty() ? null : wishlist.get(0);
     }
 
@@ -76,9 +75,8 @@ public class WishlistRepository {
         return jdbc.query(sql, wishlistRowMapper);
     }
 
-    public List<Wishlist> allWishlistsForUser(int userId){
-        String sql = "SELECT * FROM wishlist WHERE ownerId = ?";
-
-        return jdbc.query(sql,wishlistRowMapper,userId);
+    public List<Wishlist> allWishlistsForUser(int userId) {
+        String sql = "SELECT * FROM wishlist WHERE userId = ?";
+        return jdbc.query(sql, wishlistRowMapper, userId);
     }
 }

@@ -1,4 +1,5 @@
 package com.kuganappa.wishlist.service;
+
 import com.kuganappa.wishlist.model.Wishlist;
 import com.kuganappa.wishlist.repository.WishlistRepository;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class WishlistService {
         wishlistRepository.createWishlist(wishlist);
     }
 
-    public void addWishToWishlist(int wishlistId, int wishId) {
-        wishlistRepository.addWishToWishlist(wishlistId, wishId);
+    public void addWishToWishlist(int wishId, int wishlistID) {
+        wishlistRepository.addWishToWishlist(wishId, wishlistID);
     }
 
     public Wishlist getSpecificWishlist(int wishlistId) {

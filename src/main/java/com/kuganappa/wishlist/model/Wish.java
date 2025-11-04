@@ -1,7 +1,5 @@
 package com.kuganappa.wishlist.model;
 
-import java.util.List;
-
 public class Wish {
     private int wishId;
     private String wishName;
@@ -19,6 +17,7 @@ public class Wish {
     }
 
     public Wish() {
+
     }
 
     public int getWishId() {

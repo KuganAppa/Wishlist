@@ -21,36 +21,37 @@ public class UserRepository {
     }
 
     public final RowMapper<User> rowMapper = (rs, rowNum) ->
-        new User(
-                rs.getString("userName"),
-                rs.getString("email"),
-                rs.getString("password"),
-                rs.getObject("dateOfBirth", LocalDate.class)
-        );
+            new User(
+                    rs.getString("userName"),
+                    rs.getString("email"),
+                    rs.getString("password"),
+                    rs.getObject("dateOfBirth", LocalDate.class)
+            );
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return jdbc.query("SELECT * FROM users", rowMapper);
     }
 
-    public void createUser(User user){
-       KeyHolder keyHolder = new GeneratedKeyHolder();
+    public void createUser(User user) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-       jdbc.update(connection -> {
-           PreparedStatement ps = connection.prepareStatement(
-                   "INSERT INTO users (userName, email, password, dateOfBirth)" +
-                           " VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS
-           );
-           ps.setString(1,user.getUserName());
-           ps.setString(2,user.getEmail());
-           ps.setString(3,user.getPassword());
-           ps.setObject(4,user.getDateOfBirth());
-           return ps;
-       }, keyHolder);
+        jdbc.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO users (userName, email, password, dateOfBirth)" +
+                            " VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS
+            );
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.setObject(4, user.getDateOfBirth());
+            return ps;
+        }, keyHolder);
 
-       Number id = keyHolder.getKey();
-       if (id!=null){
-           user.setUserId(id.intValue());
-       }
+        Number id = keyHolder.getKey();
+
+        if (id != null) {
+            user.setUserId(id.intValue());
+        }
     }
 
     public User getUserFromName(String userName) {
@@ -64,10 +65,4 @@ public class UserRepository {
                 "SELECT * FROM users WHERE userId = ?", rowMapper, userId);
         return list.isEmpty() ? null : list.getFirst();
     }
-
-
-
-
-
-
 }
