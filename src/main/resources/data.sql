@@ -1,9 +1,14 @@
 -- 1. Users først
 INSERT INTO users (userName, email, password, dateOfBirth)
-VALUES ('Osman Git', 'osman@github.com', 'osman123', '1993-10-21'),
-       ('Oskar Cola', 'oskar@cocacola.com', 'jegelskercola', '1953-05-03'),
-       ('Kugan Appa', 'kugan-appa@ceomail.com', 'skejs123', '1954-02-08')
-        ON DUPLICATE KEY UPDATE userName=userName;
+VALUES
+    ('Osman Git', 'osman@github.com', 'osman123', '1993-10-21'),
+    ('Oskar Cola', 'oskar@cocacola.com', 'jegelskercola', '1953-05-03'),
+    ('Kugan Appa', 'kugan-appa@ceomail.com', 'skejs123', '1954-02-08')
+ON DUPLICATE KEY UPDATE
+                     userName = VALUES(userName),
+                     email = VALUES(email),
+                     password = VALUES(password),
+                     dateOfBirth = VALUES(dateOfBirth);
 
 -- 2. Wishes
 INSERT INTO wish (wishName, description, price, pictureLink, purchaseLink)

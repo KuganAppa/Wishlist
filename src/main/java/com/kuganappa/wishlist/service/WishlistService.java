@@ -4,6 +4,8 @@ import com.kuganappa.wishlist.model.Wishlist;
 import com.kuganappa.wishlist.repository.WishlistRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WishlistService {
     private final WishlistRepository wishlistRepository;
@@ -24,7 +26,7 @@ public class WishlistService {
         return wishlistRepository.getSpecificWishlist(wishlistId);
     }
 
-    public Object allWishlistsForUser(int userId) {
+    public List<Wishlist> allWishlistsForUser(int userId) {
         return wishlistRepository.allWishlistsForUser(userId);
     }
 }

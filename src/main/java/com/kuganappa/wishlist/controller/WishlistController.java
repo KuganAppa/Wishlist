@@ -97,6 +97,8 @@ public class WishlistController {
         return "showSpecificWish";
     }
 
+    //add wish to wishlist
+
     @PostMapping("/users")
     public String createUser(@ModelAttribute User user) {
         userService.createUser(user);
