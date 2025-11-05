@@ -14,12 +14,12 @@ public class WishService {
         this.wishRepository = wishRepository;
     }
 
-    public void createWish(Wish wish) {
-        wishRepository.createWish(wish);
+    public int createWish(Wish wish) {
+        return wishRepository.createWish(wish);
     }
 
-    public List<Wish> getWishes() {
-        return wishRepository.getWishes();
+    public List<Wish> getAllWishes() {
+        return wishRepository.getAllWishes();
     }
 
     public Wish getWish(int wishId) {

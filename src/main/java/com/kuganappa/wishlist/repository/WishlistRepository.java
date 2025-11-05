@@ -45,10 +45,16 @@ public class WishlistRepository {
         }
     }
 
-    public void addWishToWishlist(int wishId, int wishlistId) {
-        String sql = "INSERT INTO wishlist_wishes (wishId, wishlistId) VALUES (?, ?)";
-        jdbc.update(sql, wishId, wishlistId);
+    public void addWishToWishlist(int wishlistId, int wishId) {
+        String checkSql = "SELECT COUNT(*) FROM wishlist_wishes WHERE wishlistId = ? AND wishId = ?";
+        Integer count = jdbc.queryForObject(checkSql, Integer.class, wishlistId, wishId);
+
+        if (count != null && count == 0) {
+            String insertSql = "INSERT INTO wishlist_wishes (wishlistId, wishId) VALUES (?, ?)";
+            jdbc.update(insertSql, wishlistId, wishId);
+        }
     }
+
 
     public List<Wish> getWishesFromWishlist(Integer wishlistId) {
         String sql = """
@@ -75,8 +81,8 @@ public class WishlistRepository {
         return jdbc.query(sql, wishlistRowMapper);
     }
 
-    public List<Wishlist> allWishlistsForUser(int userId) {
-        String sql = "SELECT * FROM wishlist WHERE userId = ?";
-        return jdbc.query(sql, wishlistRowMapper, userId);
+    public List<Wishlist> allWishlistsForUser(int ownerId) {
+        String sql = "SELECT * FROM wishlist WHERE ownerId = ?";
+        return jdbc.query(sql, wishlistRowMapper, ownerId);
     }
 }

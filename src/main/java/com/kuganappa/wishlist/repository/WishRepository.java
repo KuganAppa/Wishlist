@@ -43,7 +43,7 @@ public class WishRepository {
         throw new RuntimeException("Failed to generate ID for wish");
     }
 
-    public List<Wish> getWishes() {
+    public List<Wish> getAllWishes() {
         return jdbc.query("SELECT * FROM wish", wishRowMapper);
     }
 

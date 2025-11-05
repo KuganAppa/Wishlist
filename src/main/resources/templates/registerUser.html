@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret bruger - Wishy</title>
+    <link th:href="@{/main.css}" rel="stylesheet">
+</head>
+<body>
+<header class="app-header">
+    <h2>Wishy</h2>
+</header>
+
+<main class="container">
+    <div class="card form">
+        <h1 class="text-center">Opret bruger</h1>
+
+        <form th:action="@{/wishy/register}" th:object="${user}" method="post">
+            <label for="userName">Brugernavn:</label>
+            <input type="text" id="userName" th:field="*{userName}" class="input" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" class="input" required>
+
+            <label for="password">Adgangskode:</label>
+            <input type="password" id="password" th:field="*{password}" class="input" required>
+
+            <label for="confirmPassword">Bekræft adgangskode:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="input" required>
+
+            <label for="dateOfBirth">Fødselsdag:</label>
+            <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" class="input">
+
+            <div class="actions mt-2 text-center">
+                <button type="submit" class="btn">Opret bruger</button>
+                <a th:href="@{/wishy/login}" class="btn">Tilbage til login</a>
+            </div>
+
+            <p th:if="${error}" th:text="${error}" class="error mt-2"></p>
+        </form>
+    </div>
+</main>
+</body>
+</html>

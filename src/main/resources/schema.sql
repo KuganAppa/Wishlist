@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS wish (
     wishName VARCHAR(50) UNIQUE NOT NULL,
     description TEXT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
-    pictureLink TEXT,
+    pictureLink VARCHAR(1000),
     purchaseLink TEXT
 );
 

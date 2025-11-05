@@ -1,15 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="da">
+<html xmlns:th="http://www.thymeleaf.org" lang="da">
 <head>
     <meta charset="UTF-8">
+    <title>Alle ønsker - Wishy</title>
     <link th:href="@{/main.css}" rel="stylesheet">
-    <title>Title</title>
-</head>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
+
+<header class="app-header">
+    <h1>Alle ønsker</h1>
+</header>
+
+<main class="container">
+    <section class="card">
+        <ul class="list">
+            <li class="list-item" th:each="wish : ${wishes}">
+                <div class="item-left">
+                    <div class="item-title" th:text="${wish.wishName}">Ønskenavn</div>
+                    <div class="item-desc" th:text="${wish.description}">Beskrivelse af ønsket</div>
+                    <div class="item-price" th:text="'Pris: ' + ${wish.price} + ' kr.'">Pris: 0 kr.</div>
+                </div>
+                <div class="item-actions">
+                    <a class="btn" th:href="@{'/wishy/wishes/' + ${wish.wishId}}">Se detaljer</a>
+                </div>
+            </li>
+        </ul>
+        <div class="controls mt-2">
+            <a class="btn" th:href="@{/wishy/createWish}">Tilføj nyt ønske</a>
+        </div>
+
+        <div class="controls mt-2">
+            <a class="btn" th:href="@{'/wishy/homepage/' + ${session.user.userId}}">Tilbage til forside</a>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    &copy; 2025 Wishy
+</footer>
 
 </body>
 </html>

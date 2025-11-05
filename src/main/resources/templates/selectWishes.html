@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Vælg Ønske - Wishy</title>
+    <link th:href="@{/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<header class="app-header">
+    <h1>Vælg et ønske at tilføje</h1>
+</header>
+
+<main class="container">
+    <section class="card">
+        <ul class="list">
+            <li class="list-item" th:each="wish : ${allWishes}">
+                <div class="item-left">
+                    <div class="item-title" th:text="${wish.wishName}">Ønske navn</div>
+                    <div class="item-desc" th:text="${wish.description}">Beskrivelse</div>
+                    <div class="item-price" th:text="${wish.price} + ' kr.'">Pris</div>
+                </div>
+
+                <div class="item-actions">
+                    <a class="btn"
+                       th:href="@{'/wishy/wishlists/addWish?wishlistId=' + ${wishlistId} + '&wishId=' + ${wish.wishId}}">
+                        Tilføj til liste
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="controls mt-2">
+            <a class="btn" th:href="@{'/wishy/wishlists/' + ${wishlistId}}">Tilbage</a>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    &copy; 2025 Wishy
+</footer>
+
+</body>
+</html>

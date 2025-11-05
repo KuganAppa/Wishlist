@@ -1,14 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="da">
+<html xmlns:th="⁦http://www.thymeleaf.org⁩" lang="da">
 <head>
     <meta charset="UTF-8">
+    <title th:text="'Bruger: ' + ${user.userName}">Bruger</title>
     <link th:href="@{/main.css}" rel="stylesheet">
-    <title>Title</title>
-</head>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
+<header class="app-header">
+    <h2>Wishy</h2>
+</header>
+
+<main class="container">
+    <div class="card">
+        <h1 th:text="${user.userName}">Bruger Navn</h1>
+
+        <div class="user-info text-center mb-2">
+            <p><strong>Email:</strong> <span th:text="${user.email}">email@eksempel.dk</span></p>
+            <p><strong>Fødselsdag:</strong> <span th:text="${user.dateOfBirth}">YYYY-MM-DD</span></p>
+        </div>
+
+        <h2>Ønskelister</h2>
+        <ul class="list">
+            <li th:each="wishlist : ${usersLists}" class="list-item">
+                <div class="item-left">
+                    <a th:href="@{'/wishy/wishlists/' + ${wishlist.wishlistId}}" class="item-title" th:text="${wishlist.wishlistName}">Wishlist Navn</a>
+                    <p class="item-desc" th:text="${wishlist.description}">Beskrivelse</p>
+                </div>
+            </li>
+        </ul>
+
+        <div class="actions mt-2 text-center">
+            <a th:href="@{/wishy/users}" class="btn">Tilbage til alle brugere</a>
+        </div>
+    </div>
+</main>
 </body>
 </html>

@@ -18,7 +18,7 @@ public class UserService {
         userRepository.createUser(user);
     }
 
-    public User getUser(int id) {
+    public User getUserFromId(int id) {
         return userRepository.getUserFromId(id);
     }
 
@@ -28,5 +28,13 @@ public class UserService {
 
     public User getUserFromName(String username) {
         return userRepository.getUserFromName(username);
+    }
+
+    public boolean usernameExists(String userName) {
+        return userRepository.getUserFromName(userName) != null;
+    }
+
+    public boolean emailExists(String email) {
+        return userRepository.getUserFromEmail(email) != null;
     }
 }

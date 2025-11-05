@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="da">
+<html xmlns:th="⁦http://www.thymeleaf.org⁩" lang="da">
 <head>
     <meta charset="UTF-8">
+    <title th:text="'Ønske: ' + ${wish.wishName}">Ønske</title>
     <link th:href="@{/main.css}" rel="stylesheet">
-    <title>Title</title>
-</head>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
+<header class="app-header">
+    <h2>Wishy</h2>
+</header>
 
+<main class="container">
+    <div class="card text-center">
+        <h1 class="item-title" th:text="${wish.wishName}">Ønske Navn</h1>
+
+        <div class="wish-info mt-2 mb-2">
+            <p class="item-desc" th:text="${wish.description}">Beskrivelse af ønsket</p>
+            <p class="item-price" th:text="'Pris: ' + ${wish.price} + ' kr'">Pris: 0 kr</p>
+
+            <img th:if="${wish.pictureLink}" th:src="${wish.pictureLink}" alt="Billede af ønsket" class="mt-2 mb-2" style="max-width: 300px; border-radius: 10px;">
+
+            <p th:if="${wish.purchaseLink}" class="mt-2">
+                <a th:href="${wish.purchaseLink}" target="_blank" class="btn">Køb her</a>
+            </p>
+        </div>
+
+        <div class="actions mt-2">
+            <a th:href="@{/wishy/wishes}" class="btn">Tilbage til alle ønsker</a>
+        </div>
+    </div>
+</main>
 </body>
 </html>
