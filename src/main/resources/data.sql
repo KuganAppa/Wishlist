@@ -12,7 +12,7 @@ ON DUPLICATE KEY UPDATE
 
 -- 2. Wishes
 INSERT INTO wish (wishName, description, price, pictureLink, purchaseLink)
-VALUES ('PlayStation 5', 'Spillekonsol', 4000.00, null, null),
+VALUES ('PlayStation 5', 'Spillekonsol', 4000.00, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.boozt.com%2Fdk%2Fda%2Fbarbie%2Fhpj96-pa-lead-brb-2_32489470&psig=AOvVaw384lYQNbZmsHluB22WpCvq&ust=1762425473641000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCICFk9Xo2pADFQAAAAAdAAAAABAE', null),
        ('Barbie', 'Dukke', 200.00, null, null),
        ('iPhone 16', 'Smartphone', 8000.00, null, null),
        ('GitHub CoPilot', 'Coding Assistant', 100.00, null, null),
