@@ -108,7 +108,7 @@ public class WishlistController {
     // List of wishes
     @GetMapping("/wishes")
     public String showWishes(Model model){
-        model.addAttribute("wishes", wishService.getWishes());
+        model.addAttribute("wishes", wishService.getAllWishes());
         return "showWishes";
     }
 
@@ -122,6 +122,19 @@ public class WishlistController {
 
 
     //add wish to wishlist
+    @GetMapping("/wishes/select")
+    public String showAllWishesForSelection(@RequestParam int wishlistId, Model model) {
+        model.addAttribute("wishlistId", wishlistId);
+        model.addAttribute("allWishes", wishService.getAllWishes()); // fx findAll i DB
+        return "selectWishes"; // thymeleaf-side
+    }
+
+    @GetMapping("/wishlists/addWish")
+    public String addWishToWishlist(@RequestParam int wishlistId, @RequestParam int wishId) {
+        wishlistService.addWishToWishlist(wishlistId, wishId);
+        return "redirect:/wishy/wishlists/" + wishlistId;
+    }
+
 
     @PostMapping("/users")
     public String createUser(@ModelAttribute User user) {
@@ -184,10 +197,6 @@ public class WishlistController {
         wish.setPrice(price);
         wish.setPictureLink(pictureLink);
         wish.setPurchaseLink(purchaseLink);
-
-        int wishId = wish.getWishId(); // returner ID fra repository
-        wishlistService.addWishToWishlist(wishId, wishlistId);
-
         return "redirect:/wishy/wishlists/" + wishlistId;
     }
 

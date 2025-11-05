@@ -18,8 +18,8 @@ public class WishService {
         return wishRepository.createWish(wish);
     }
 
-    public List<Wish> getWishes() {
-        return wishRepository.getWishes();
+    public List<Wish> getAllWishes() {
+        return wishRepository.getAllWishes();
     }
 
     public Wish getWish(int wishId) {
