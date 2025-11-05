@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="⁦http://www.thymeleaf.org⁩" lang="da">
+<html xmlns:th="http://www.thymeleaf.org" lang="da">
 <head>
     <meta charset="UTF-8">
     <title>Ønskeliste - Wishy</title>
@@ -15,13 +15,32 @@
     <section class="card">
         <p th:text="${wishlist.description}">Beskrivelse af ønskeliste</p>
 
+        <h2>Ønsker</h2>
+        <div th:if="${#lists.isEmpty(wishlist.wishes)}" class="empty">
+            Ingen ønsker i denne liste endnu.
+        </div>
+
+        <ul th:if="${!#lists.isEmpty(wishlist.wishes)}" class="list mt-2">
+            <li class="list-item" th:each="wish : ${wishlist.wishes}">
+                <div class="item-left">
+                    <div class="item-title" th:text="${wish.wishName}">Ønskenavn</div>
+                    <div class="item-desc" th:text="${wish.description}">Beskrivelse</div>
+                    <div class="item-price" th:text="${wish.price + ' kr.'}">Pris</div>
+                </div>
+
+                <div class="item-actions">
+                    <a class="btn" th:href="@{'/wishy/wishes/' + ${wish.wishId}}">Se ønske</a>
+                </div>
+            </li>
+        </ul>
+
         <div class="controls mt-2">
             <a class="btn" th:href="@{'/wishy/homepage/' + ${wishlist.owner.userId}}">Tilbage til forside</a>
             <a class="btn" th:href="@{'/wishy/' + ${wishlist.owner.userId} + '/wishlists'}">Tilbage til lister</a>
-
-            <a class="btn" th:href="@{'/wishy/createWish?wishlistId=' + ${wishlist.wishlistId}}">Tilføj ønske til listen</a>
+            <a class="btn" th:href="@{'/wishy/wishes/select?wishlistId=' + ${wishlist.wishlistId}}">
+                Tilføj eksisterende ønske
+            </a>
         </div>
-
     </section>
 </main>
 
