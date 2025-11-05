@@ -181,12 +181,12 @@ p.error {
     gap: 0.5rem;
 }
 
-⁦a.link⁩ {
+a.link {
     color: var(--primary);
     text-decoration: none;
     font-weight: 600;
 }
-⁦a.link⁩:hover { text-decoration: underline; }
+a.link:hover { text-decoration: underline; }
 
 .hero {
     text-align: center;
