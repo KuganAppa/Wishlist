@@ -55,7 +55,6 @@ public class WishlistRepository {
         }
     }
 
-
     public List<Wish> getWishesFromWishlist(Integer wishlistId) {
         String sql = """
                     SELECT w.*

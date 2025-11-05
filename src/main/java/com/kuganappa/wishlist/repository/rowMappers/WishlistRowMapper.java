@@ -20,7 +20,6 @@ public class WishlistRowMapper implements RowMapper<Wishlist> {
         int ownerId = rs.getInt("ownerId");
         User owner = new User();
         owner.setUserId(ownerId);
-        // evt. sæt flere felter hvis du har dem i tabellen
         wishlist.setOwner(owner);
 
         return wishlist;

@@ -1,18 +1,11 @@
-/* main.css - Wishy (enkelt, genbrugeligt, studie-niveau)
-•  Farver og spacing defineret som CSS-variabler for nem tilpasning
-•  Simpel grid / card-opsætning til lister
-•  Let responsive: fungerer fint fra mobil til desktop
-*/
-
-/* ========== VARIABLES & RESET ========== */
 :root{
-    --bg: #f8fafc;           /* side baggrund */
-    --card: #ffffff;         /* kort / container baggrund */
-    --primary: #2563eb;      /* primær blå */
-    --primary-dark: #1d4ed8; /* hover blå */
-    --muted: #64748b;        /* sekundær tekst */
-    --success: #16a34a;      /* prisfarve */
-    --danger: #ef4444;       /* fejl/alert */
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --muted: #64748b;
+    --success: #16a34a;
+    --danger: #ef4444;
     --radius: 10px;
     --card-padding: 1.25rem;
     --max-width: 1000px;
@@ -37,10 +30,8 @@ html,body{
     font-size: 16px;
 }
 
-/* Remove default list styling for ul/ol we control */
 ul,ol { padding: 0; margin: 0; }
 
-/* ========== HEADER / NAV ========== */
 header.app-header {
     background: var(--primary);
     color: white;
@@ -57,14 +48,12 @@ header.app-header h1, header.app-header h2 {
     letter-spacing: 0.2px;
 }
 
-/* small site wrapper */
 .container {
     max-width: var(--max-width);
     margin: 1.5rem auto;
     padding: 0 1rem;
 }
 
-/* Card pattern for central content */
 .card {
     background: var(--card);
     border-radius: var(--radius);
@@ -72,7 +61,6 @@ header.app-header h1, header.app-header h2 {
     box-shadow: var(--shadow);
 }
 
-/* ========== TYPOGRAPHY ========== */
 h1, h2, h3 {
     color: var(--primary);
     margin-top: 0;
@@ -88,7 +76,6 @@ p {
     color: var(--muted);
 }
 
-/* ========== FORM / LOGIN ========== */
 .form {
     max-width: 420px;
     margin: 0 auto;
@@ -123,7 +110,7 @@ button.btn, a.btn {
     background: var(--primary);
     color: white;
     text-decoration: none;
-    padding: 0.65rem 1rem; /* samme som button */
+    padding: 0.65rem 1rem;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
@@ -137,14 +124,12 @@ button.btn:hover, a.btn:hover {
     transform: translateY(-1px);
 }
 
-/* error message */
 p.error {
     color: var(--danger);
     margin-top: 0.75rem;
     font-weight: 600;
 }
 
-/* ========== LISTS / CARDS ========== */
 .list {
     list-style: none;
     margin: 0;
@@ -153,7 +138,6 @@ p.error {
     gap: 0.9rem;
 }
 
-/* For wishlists/wishes/users - simple card row */
 .list-item {
     background: #f1f5f9;
     border-radius: 8px;
@@ -170,7 +154,6 @@ p.error {
     background: #e0e7ff;
 }
 
-/* left area: title + desc */
 .item-left {
     flex: 1;
     min-width: 0;
@@ -182,26 +165,22 @@ p.error {
     margin-bottom: 0.25rem;
 }
 
-/* secondary text */
 .item-desc {
     color: var(--muted);
     font-size: 0.95rem;
 }
 
-/* price style for wishes */
 .item-price {
     color: var(--success);
     font-weight: 700;
 }
 
-/* small action links on right */
 .item-actions {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-/* link style */
 ⁦a.link⁩ {
     color: var(--primary);
     text-decoration: none;
@@ -209,18 +188,16 @@ p.error {
 }
 ⁦a.link⁩:hover { text-decoration: underline; }
 
-/* ========== SPECIFIC - homepage / hero / small utility ========== */
 .hero {
     text-align: center;
     padding: 1.3rem;
     margin-bottom: 1rem;
 }
 
-/* Knapper */
 .controls {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem; /* øget afstand mellem knapper */
+    gap: 1rem;
     justify-content: center;
     margin-top: 1.5rem;
 }
@@ -229,7 +206,7 @@ a.btn {
     background: var(--primary);
     color: white;
     text-decoration: none;
-    padding: 0.75rem 1.5rem; /* større knapper */
+    padding: 0.75rem 1.5rem;
     border-radius: 8px;
     font-weight: 600;
     transition: background var(--transition-fast), transform var(--transition-fast);
@@ -239,12 +216,11 @@ a.btn:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
 }
-/* gør knapperne lidt “klikbare” */
+
 a.btn:active {
     transform: translateY(0);
 }
 
-/* small footer */
 ⁦footer.site⁩-footer {
     text-align: center;
     color: var(--muted);
@@ -252,7 +228,6 @@ a.btn:active {
     font-size: 0.9rem;
 }
 
-/* ========== RESPONSIVE ========== */
 @media (min-width: 780px) {
     .list {
         grid-template-columns: 1fr 1fr;
@@ -264,14 +239,12 @@ a.btn:active {
     .list { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* ========== UTILITY CLASSES ========== */
 .mt-1 { margin-top: 0.5rem; }
 .mt-2 { margin-top: 1rem; }
 .mb-1 { margin-bottom: 0.5rem; }
 .text-center { text-align: center; }
 .text-muted { color: var(--muted); }
 
-/* small helper for empty states */
 .empty {
     text-align: center;
     padding: 1.2rem;
