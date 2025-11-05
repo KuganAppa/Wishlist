@@ -1,28 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="⁦http://www.thymeleaf.org⁩" lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Alle ønsker - Wishy</title>
+    <link th:href="@{/main.css}" rel="stylesheet">
+</head>
 <body>
-<div class="max-w-4xl mx-auto mt-10">
-    <h1 class="text-3xl font-bold mb-6">Alle ønsker</h1>
 
-    <div class="mb-4 flex justify-end">
-        <a href="/wishy/createWish" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-            Tilføj nyt ønske
-        </a>
-    </div>
+<header class="app-header">
+    <h1>Alle ønsker</h1>
+</header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div th:each="wish : ${wishes}" class="bg-white shadow p-4 rounded">
-            <h3 class="text-xl font-bold" th:text="${wish.wishName}">Ønske Navn</h3>
-            <p class="text-gray-600" th:text="${wish.description}">Beskrivelse</p>
-            <p class="text-gray-800 font-semibold mt-2" th:text="'Pris: ' + ${wish.price} + ' kr'">Pris</p>
-            <a th:if="${wish.purchaseLink}" th:href="${wish.purchaseLink}" target="_blank"
-               class="text-blue-600 hover:underline mt-2 inline-block">Køb her</a>
-            <a th:href="@{'/wishy/wishes/' + ${wish.wishId}}" class="text-gray-700 hover:underline mt-1 inline-block">
-                Se detaljer
-            </a>
+<main class="container">
+    <section class="card">
+        <ul class="list">
+            <li class="list-item" th:each="wish : ${wishes}">
+                <div class="item-left">
+                    <div class="item-title" th:text="${wish.wishName}">Ønskenavn</div>
+                    <div class="item-desc" th:text="${wish.description}">Beskrivelse af ønsket</div>
+                    <div class="item-price" th:text="'Pris: ' + ${wish.price} + ' kr.'">Pris: 0 kr.</div>
+                </div>
+                <div class="item-actions">
+                    <a class="btn" th:href="@{'/wishy/wishes/' + ${wish.wishId}}">Se detaljer</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="controls mt-2">
+            <a class="btn" th:href="@{'/wishy/homepage/' + ${session.user.userId}}">Tilbage til forside</a>
         </div>
-    </div>
-</div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    &copy; 2025 Wishy
+</footer>
+
 </body>
 </html>

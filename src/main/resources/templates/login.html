@@ -1,64 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="⁦http://www.thymeleaf.org⁩" lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin: 10px 0;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #0078d4;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #005fa3;
-        }
-        .error {
-            color: red;
-            font-size: 0.9em;
-            margin: 5px 0;
-        }
-    </style>
+    <title>Wishy - Login</title>
+    <link th:href="@{/main.css}" rel="stylesheet">
 </head>
 <body>
-<div class="login-container">
-    <h2>Login</h2>
-    <form th:action="@{/wishy/login}" method="post">
-        <label for="username">Brugernavn</label>
-        <input type="text" id="username" name="username" required>
+<div class="login-container card">
+    <h1>Wishy</h1>
+    <form th:action="@{/wishy/login}" method="post" class="form">
+        <label for="username">Brugernavn:</label>
+        <input type="text" id="username" name="username" required class="input">
 
-        <label for="password">Adgangskode</label>
-        <input type="password" id="password" name="password" required>
+        <label for="password">Adgangskode:</label>
+        <input type="password" id="password" name="password" required class="input">
 
-        <button type="submit">Log ind</button>
+        <button type="submit" class="btn">Log ind</button>
 
-        <!-- Fejlmeddelelse -->
-        <div th:if="${error}" class="error" th:text="${error}"></div>
+        <p th:if="${error}" th:text="${error}" class="error"></p>
     </form>
+
+    <a th:href="@{/register}" class="btn mt-2">Har du ikke en konto? Opret dig her</a>
 </div>
 </body>
 </html>

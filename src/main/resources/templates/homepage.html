@@ -1,22 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="⁦http://www.thymeleaf.org⁩" lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Wishy - Forside</title>
+    <link th:href="@{/main.css}" rel="stylesheet">
+</head>
 <body>
-<div class="max-w-4xl mx-auto mt-10">
-    <h1 class="text-3xl font-bold mb-6" th:text="'Velkommen, ' + ${user.userName} + '!'">Velkommen!</h1>
 
-    <div class="mb-4 flex justify-between items-center">
-        <h2 class="text-2xl font-semibold">Dine ønskelister</h2>
-        <a href="/wishy/createWishlist" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Opret ny ønskeliste</a>
-    </div>
+<header class="app-header">
+    <h1>Velkommen til Wishy</h1>
+</header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div th:each="wishlist : ${usersLists}" class="bg-white shadow p-4 rounded">
-            <h3 class="text-xl font-bold" th:text="${wishlist.wishlistName}">Wishlist Navn</h3>
-            <p class="text-gray-600" th:text="${wishlist.description}">Beskrivelse</p>
-            <a th:href="@{'/wishy/wishlists/' + ${wishlist.wishlistId}}" class="text-blue-600 hover:underline mt-2 inline-block">Se detaljer</a>
+<main class="container">
+    <section class="card">
+        <h2 th:text="'Hej, ' + ${user.userName} + '!'">Hej, bruger!</h2>
+
+        <p>Hvad vil du gerne gøre i dag?</p>
+
+        <div class="controls mt-2">
+            <a class="btn" th:href="@{'/wishy/' + ${user.userId} + '/wishlists'}">Se mine ønskelister</a>
+            <a class="btn" th:href="@{/wishy/wishes}">Se alle ønsker</a>
+            <a class="btn" th:href="@{/wishy/users}">Se alle brugere</a>
         </div>
-    </div>
-</div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    &copy; 2025 Wishy
+</footer>
+
 </body>
 </html>

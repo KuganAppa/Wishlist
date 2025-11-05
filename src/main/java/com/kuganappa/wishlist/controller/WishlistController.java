@@ -44,9 +44,9 @@ public class WishlistController {
                         HttpSession session) {
 
         User user = userService.getUserFromName(username);
-        if (user != null && password.equals(user.getPassword())) {  // TODO: bcrypt senere
+        if (user != null && password.equals(user.getPassword())) {
             session.setAttribute("user", user);
-            int userId = user.getUserId();  // hent det rigtige id fra DB
+            int userId = user.getUserId();
             return "redirect:/wishy/homepage/" + userId;
         } else {
             return "redirect:/wishy/login?error=true";
@@ -73,7 +73,7 @@ public class WishlistController {
     @GetMapping("{userId}/wishlists")
     public String showAllWishlist(@PathVariable int userId, Model model){
         model.addAttribute("user", userService.getUserFromId(userId));
-        model.addAttribute("usersLists", wishlistService.allWishlistsForUser(userId));
+        model.addAttribute("userWishlists", wishlistService.allWishlistsForUser(userId));
         return "showAllWishlistsForUser";
     }
 
@@ -130,20 +130,40 @@ public class WishlistController {
     }
 
     // Åbner siden til at oprette en ny ønskeliste
-    @GetMapping("/wishy/createWishlist/{userId}")
-    public String showCreateWishlistForm(@PathVariable int userId, Model model) {
-        User user = userService.getUserFromId(userId);
+    @GetMapping("/createWishlist")
+    public String showCreateWishlistForm(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/wishy/login";
         }
         model.addAttribute("user", user);
-        return "createWishlist"; // Thymeleaf template
+        return "createWishlist";
     }
 
+    // Opretter selve ønskelisten
+    @PostMapping("/createWishlist")
+    public String createWishlist(@RequestParam String wishlistName,
+                                 @RequestParam String description,
+                                 HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/wishy/login";
+        }
+
+        Wishlist wishlist = new Wishlist();
+        wishlist.setWishlistName(wishlistName);
+        wishlist.setDescription(description);
+        wishlist.setOwner(user);
+
+        wishlistService.createWishlist(wishlist);
+        return "redirect:/wishy/homepage/" + user.getUserId();
+    }
+
+
     // Åbner siden til at oprette et nyt ønske
-    @GetMapping("/wishy/createWish/{wishlistId}")
-    public String showCreateWishForm(@PathVariable int wishlistId, Model model) {
-        model.addAttribute("wishlistId", wishlistId);
+    @GetMapping("/createWish")
+    public String showCreateWishForm(Model model) {
+        //model.addAttribute("wishlistId", wishlistId);
         return "createWish"; // Thymeleaf template
     }
 
@@ -173,16 +193,5 @@ public class WishlistController {
 
 
 
-    @PostMapping("/createWishlist")
-    public String createWishlist(@RequestParam String wishlistName,
-                                 @RequestParam String description,
-                                 @RequestParam int ownerId) {
-        Wishlist wishlist = new Wishlist();
-        wishlist.setWishlistName(wishlistName);
-        wishlist.setDescription(description);
-        wishlist.setOwner(userService.getUserFromId(ownerId));
-        wishlistService.createWishlist(wishlist);
-        return "redirect:/wishy/homepage/" + ownerId;
-    }
 
 }

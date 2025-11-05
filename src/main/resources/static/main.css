@@ -1,0 +1,282 @@
+/* main.css - Wishy (enkelt, genbrugeligt, studie-niveau)
+•  Farver og spacing defineret som CSS-variabler for nem tilpasning
+•  Simpel grid / card-opsætning til lister
+•  Let responsive: fungerer fint fra mobil til desktop
+*/
+
+/* ========== VARIABLES & RESET ========== */
+:root{
+    --bg: #f8fafc;           /* side baggrund */
+    --card: #ffffff;         /* kort / container baggrund */
+    --primary: #2563eb;      /* primær blå */
+    --primary-dark: #1d4ed8; /* hover blå */
+    --muted: #64748b;        /* sekundær tekst */
+    --success: #16a34a;      /* prisfarve */
+    --danger: #ef4444;       /* fejl/alert */
+    --radius: 10px;
+    --card-padding: 1.25rem;
+    --max-width: 1000px;
+    --font: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --transition-fast: 150ms ease;
+    --shadow: 0 3px 8px rgba(17,24,39,0.08);
+}
+
+•  {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html,body{
+    height: 100%;
+    margin: 0;
+    font-family: var(--font);
+    background: var(--bg);
+    color: #0f172a;
+    line-height: 1.45;
+    font-size: 16px;
+}
+
+/* Remove default list styling for ul/ol we control */
+ul,ol { padding: 0; margin: 0; }
+
+/* ========== HEADER / NAV ========== */
+header.app-header {
+    background: var(--primary);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+
+header.app-header h1, header.app-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    letter-spacing: 0.2px;
+}
+
+/* small site wrapper */
+.container {
+    max-width: var(--max-width);
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+}
+
+/* Card pattern for central content */
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: var(--card-padding);
+    box-shadow: var(--shadow);
+}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3 {
+    color: var(--primary);
+    margin-top: 0;
+}
+
+p {
+    margin: 0 0 0.75rem 0;
+    color: #0f172a;
+}
+
+.small {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* ========== FORM / LOGIN ========== */
+.form {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.form label {
+    display: block;
+    font-weight: 600;
+    margin: 0.5rem 0 0.25rem;
+    color: #0f172a;
+    font-size: 0.95rem;
+}
+
+.input, input[type="text"], input[type="password"], input[type="email"], textarea, select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #e6eef8;
+    background: #fbfdff;
+    font-size: 1rem;
+    outline: none;
+    transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.input:focus, input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+}
+
+button.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+button.btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+a.btn {
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+/* error message */
+p.error {
+    color: var(--danger);
+    margin-top: 0.75rem;
+    font-weight: 600;
+}
+
+/* ========== LISTS / CARDS ========== */
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+}
+
+/* For wishlists/wishes/users - simple card row */
+.list-item {
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.list-item:hover {
+    transform: translateY(-4px);
+    background: #e0e7ff;
+}
+
+/* left area: title + desc */
+.item-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.item-title {
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+/* secondary text */
+.item-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* price style for wishes */
+.item-price {
+    color: var(--success);
+    font-weight: 700;
+}
+
+/* small action links on right */
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* link style */
+⁦a.link⁩ {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+⁦a.link⁩:hover { text-decoration: underline; }
+
+/* ========== SPECIFIC - homepage / hero / small utility ========== */
+.hero {
+    text-align: center;
+    padding: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+/* Knapper */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* øget afstand mellem knapper */
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+a.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem; /* større knapper */
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+a.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+/* gør knapperne lidt “klikbare” */
+a.btn:active {
+    transform: translateY(0);
+}
+
+/* small footer */
+⁦footer.site⁩-footer {
+    text-align: center;
+    color: var(--muted);
+    padding: 1rem 0;
+    font-size: 0.9rem;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (min-width: 780px) {
+    .list {
+        grid-template-columns: 1fr 1fr;
+    }
+    .form { max-width: 480px; }
+}
+
+@media (min-width: 1100px) {
+    .list { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ========== UTILITY CLASSES ========== */
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.text-center { text-align: center; }
+.text-muted { color: var(--muted); }
+
+/* small helper for empty states */
+.empty {
+    text-align: center;
+    padding: 1.2rem;
+    color: var(--muted);
+    border: 1px dashed #e6eef8;
+    border-radius: 8px;
+    background: #fbfdff;
+}

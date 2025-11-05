@@ -1,22 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="⁦http://www.thymeleaf.org⁩" lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Bruger: ' + ${user.userName}">Bruger</title>
+    <link th:href="@{/main.css}" rel="stylesheet">
+</head>
 <body>
-<div class="max-w-4xl mx-auto mt-10">
-    <h1 class="text-3xl font-bold mb-4" th:text="${user.userName}">Brugernavn</h1>
-    <p class="text-gray-600 mb-6" th:text="'Email: ' + ${user.email}">Email</p>
+<header class="app-header">
+    <h2>Wishy</h2>
+</header>
 
-    <h2 class="text-2xl font-semibold mb-4">Ønskelister</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div th:each="wishlist : ${usersLists}" class="bg-white shadow p-4 rounded">
-            <h3 class="text-xl font-bold" th:text="${wishlist.wishlistName}">Wishlist Navn</h3>
-            <p class="text-gray-600" th:text="${wishlist.description}">Beskrivelse</p>
-            <a th:href="@{'/wishy/wishlists/' + ${wishlist.wishlistId}}"
-               class="text-blue-600 hover:underline mt-2 inline-block">
-                Se ønsker
-            </a>
+<main class="container">
+    <div class="card">
+        <h1 th:text="${user.userName}">Bruger Navn</h1>
+
+        <div class="user-info text-center mb-2">
+            <p><strong>Email:</strong> <span th:text="${user.email}">email@eksempel.dk</span></p>
+            <p><strong>Fødselsdag:</strong> <span th:text="${user.dateOfBirth}">YYYY-MM-DD</span></p>
+        </div>
+
+        <h2>Ønskelister</h2>
+        <ul class="list">
+            <li th:each="wishlist : ${usersLists}" class="list-item">
+                <div class="item-left">
+                    <a th:href="@{'/wishy/wishlists/' + ${wishlist.wishlistId}}" class="item-title" th:text="${wishlist.wishlistName}">Wishlist Navn</a>
+                    <p class="item-desc" th:text="${wishlist.description}">Beskrivelse</p>
+                </div>
+            </li>
+        </ul>
+
+        <div class="actions mt-2 text-center">
+            <a th:href="@{/wishy/users}" class="btn">Tilbage til alle brugere</a>
         </div>
     </div>
-</div>
+</main>
 </body>
 </html>

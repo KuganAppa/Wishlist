@@ -1,17 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="⁦http://www.thymeleaf.org⁩" lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Mine Ønskelister - Wishy</title>
+    <link th:href="@{/main.css}" rel="stylesheet">
+</head>
 <body>
-<div class="max-w-4xl mx-auto mt-10">
-    <h1 class="text-3xl font-bold mb-6" th:text="'Ønskelister for ' + ${user.userName}">Ønskelister</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div th:each="wishlist : ${usersLists}" class="bg-white shadow p-4 rounded">
-            <h3 class="text-xl font-bold" th:text="${wishlist.wishlistName}">Wishlist Navn</h3>
-            <p class="text-gray-600" th:text="${wishlist.description}">Beskrivelse</p>
-            <a th:href="@{'/wishy/wishlists/' + ${wishlist.wishlistId}}" class="text-blue-600 hover:underline mt-2 inline-block">Se ønsker</a>
+<header class="app-header">
+    <h1>Wishy</h1>
+</header>
+
+<main class="container">
+    <section class="card">
+        <h2>Mine ønskelister</h2>
+
+        <!-- Hvis brugeren ingen ønskelister har -->
+        <div th:if="${#lists.isEmpty(userWishlists)}" class="empty">
+            Du har ingen ønskelister endnu
         </div>
-    </div>
-</div>
+
+        <!-- Hvis der findes ønskelister -->
+        <ul th:if="${!#lists.isEmpty(userWishlists)}" class="list mt-2">
+            <li class="list-item" th:each="wishlist : ${userWishlists}">
+                <div class="item-left">
+                    <div class="item-title" th:text="${wishlist.wishlistName}">Wishlist Navn</div>
+                    <div class="item-desc" th:text="${wishlist.description}">Kort beskrivelse af ønskelisten</div>
+                </div>
+
+                <div class="item-actions">
+                    <a class="btn" th:href="@{'/wishy/wishlists/' + ${wishlist.wishlistId}}">Åbn</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="controls mt-2">
+            <a class="btn" th:href="@{'/wishy/createWishlist'}">Opret ny ønskeliste</a>
+            <a class="btn" th:href="@{'/wishy/homepage/' + ${user.userId}}">Tilbage til forside</a>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    &copy; 2025 Wishy · Lavet af Gruppe 3
+</footer>
+
 </body>
 </html>

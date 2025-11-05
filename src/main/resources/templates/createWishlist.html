@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<meta charset="UTF-8">
+<link th:href="@{/main.css}" rel="stylesheet">
 <body>
 <div class="max-w-md mx-auto mt-20 bg-white shadow-lg p-6 rounded-lg">
     <h1 class="text-2xl font-bold text-center mb-4">Opret ny ønskeliste</h1>
 
     <form action="/wishy/createWishlist" method="post" class="space-y-4">
-        <input type="hidden" name="ownerId" th:value="${user.userId}" />
-
         <div>
             <label class="block font-medium">Ønskeliste Navn</label>
             <input type="text" name="wishlistName" class="border rounded w-full p-2" required>
@@ -22,6 +21,7 @@
             Opret ønskeliste
         </button>
     </form>
+
 </div>
 </body>
 </html>
