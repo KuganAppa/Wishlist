@@ -2,11 +2,12 @@ package com.kuganappa.wishlist.model;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-
+@ActiveProfiles("test")
 class WishlistTest {
 
     @Test
