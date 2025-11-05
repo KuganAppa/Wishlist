@@ -53,32 +53,43 @@ public class WishlistController {
         }
     }
 
-    // Vis opret bruger side
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
-        return "register"; // register.html
+        return "registerUser";
     }
 
-    // POST: opret ny bruger
+
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user,
                                @RequestParam String confirmPassword,
                                Model model) {
 
+        // Tjek om brugernavn findes
         if (userService.usernameExists(user.getUserName())) {
             model.addAttribute("error", "Brugernavnet findes allerede!");
-            return "register";
+            return "registerUser";
         }
 
+        // Tjek om email findes
         if (userService.emailExists(user.getEmail())) {
-            model.addAttribute("error", "Brugernavnet findes allerede!");
-            return "register";
+            model.addAttribute("error", "Emailen findes allerede!");
+            return "registerUser";
         }
 
+        // Tjek om password matcher confirmPassword
+        if (!user.getPassword().equals(confirmPassword)) {
+            model.addAttribute("error", "Adgangskoderne matcher ikke!");
+            return "registerUser";
+        }
+
+        // Opret bruger i databasen
         userService.createUser(user);
+
         return "redirect:/wishy/login"; // redirect til login efter oprettelse
     }
+
+
 
     @GetMapping("/homepage/{userId}")
     public String showHomepage(@PathVariable int userId, Model model) {
@@ -200,11 +211,10 @@ public class WishlistController {
     }
 
 
-    // Åbner siden til at oprette et nyt ønske
     @GetMapping("/createWish")
-    public String showCreateWishForm(Model model) {
-        //model.addAttribute("wishlistId", wishlistId);
-        return "createWish"; // Thymeleaf template
+    public String showCreateWishForm(@RequestParam(required = false) Integer wishlistId, Model model) {
+        model.addAttribute("wishlistId", wishlistId); // kan være null
+        return "createWish";
     }
 
 
@@ -215,17 +225,23 @@ public class WishlistController {
                              @RequestParam String description,
                              @RequestParam double price,
                              @RequestParam(required = false) String pictureLink,
-                             @RequestParam(required = false) String purchaseLink,
-                             @RequestParam int wishlistId) {
+                             @RequestParam(required = false) String purchaseLink) {
 
+        // Opret og gem ønsket
         Wish wish = new Wish();
         wish.setWishName(wishName);
         wish.setDescription(description);
         wish.setPrice(price);
         wish.setPictureLink(pictureLink);
         wish.setPurchaseLink(purchaseLink);
-        return "redirect:/wishy/wishlists/" + wishlistId;
+
+        wishService.createWish(wish); // gemmer i DB
+
+        // Redirect til alle ønsker
+        return "redirect:/wishy/wishes";
     }
+
+
 
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="⁦http://www.thymeleaf.org⁩" lang="da">
+<html xmlns:th="http://www.thymeleaf.org" lang="da">
 <head>
     <meta charset="UTF-8">
     <title>Alle ønsker - Wishy</title>
@@ -25,6 +25,9 @@
                 </div>
             </li>
         </ul>
+        <div class="controls mt-2">
+            <a class="btn" th:href="@{/wishy/createWish}">Tilføj nyt ønske</a>
+        </div>
 
         <div class="controls mt-2">
             <a class="btn" th:href="@{'/wishy/homepage/' + ${session.user.userId}}">Tilbage til forside</a>

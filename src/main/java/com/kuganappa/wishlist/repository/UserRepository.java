@@ -51,18 +51,18 @@ public class UserRepository {
     public User getUserFromName(String userName) {
         List<User> list = jdbc.query(
                 "SELECT * FROM users WHERE userName = ?", rowMapper, userName);
-        return list.isEmpty() ? null : list.getFirst();
+        return list.isEmpty() ? null : list.get(0);
     }
 
     public User getUserFromId(int userId) {
         List<User> list = jdbc.query(
                 "SELECT * FROM users WHERE userId = ?", rowMapper, userId);
-        return list.isEmpty() ? null : list.getFirst();
+        return list.isEmpty() ? null : list.get(0);
     }
 
     public User getUserFromEmail(String email) {
         List<User> list = jdbc.query(
                 "SELECT * FROM users WHERE email = ?", rowMapper, email);
-        return list.isEmpty() ? null : list.getFirst();
+        return list.isEmpty() ? null : list.get(0);
     }
 }
