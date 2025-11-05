@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("wishy")
 public class WishlistController {
@@ -29,73 +31,95 @@ public class WishlistController {
         return "login";
     }
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login"; // login.html i templates-mappen
+    }
+
+
     // Login
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+    public String login(@RequestParam String username,
+                        @RequestParam String password,
+                        HttpSession session) {
+
         User user = userService.getUserFromName(username);
-
-        if (user == null) {
-            model.addAttribute("error", "Brugernavn findes ikke");
-            return "login";
-        }
-
-        if (password.equals(user.getPassword())) {
+        if (user != null && password.equals(user.getPassword())) {  // TODO: bcrypt senere
             session.setAttribute("user", user);
-            return "redirect:/wishy/homepage/" + user.getUserId();
+            int userId = user.getUserId();  // hent det rigtige id fra DB
+            return "redirect:/wishy/homepage/" + userId;
         } else {
-            model.addAttribute("error", "Forkert adgangskode");
-            return "login";
+            return "redirect:/wishy/login?error=true";
         }
     }
 
-    // Homepage
     @GetMapping("/homepage/{userId}")
-    public String homepage(@PathVariable int userId, Model model) {
-        model.addAttribute("user", userService.getUser(userId));
-        return "homepage";
+    public String showHomepage(@PathVariable int userId, Model model) {
+        User user = userService.getUserFromId(userId); // hent bruger
+        if (user == null) {
+            return "redirect:/wishy/login"; // hvis user ikke findes
+        }
+        model.addAttribute("user", user);
+
+        // Hvis du vil vise ønskelister:
+        List<Wishlist> usersLists = wishlistService.allWishlistsForUser(userId);
+        model.addAttribute("usersLists", usersLists);
+
+        return "homepage"; // homepage.html
     }
 
-    // List of wishlist
+
+
     @GetMapping("{userId}/wishlists")
-    public String showAllWishlist(@PathVariable int userId, Model model) {
+    public String showAllWishlist(@PathVariable int userId, Model model){
+        model.addAttribute("user", userService.getUserFromId(userId));
         model.addAttribute("usersLists", wishlistService.allWishlistsForUser(userId));
         return "showAllWishlistsForUser";
     }
 
-    // Specific wishlist
+
     @GetMapping("/wishlists/{wishlistId}")
-    public String showSpecificWishlist(@PathVariable int wishlistId, Model model) {
-        model.addAttribute("wishlist", wishlistService.getSpecificWishlist(wishlistId));
+    public String showSpecificWishlist(@PathVariable int wishlistId, Model model){
+        Wishlist wishlist = wishlistService.getSpecificWishlist(wishlistId);
+        // hent wishes fra databasen
+        wishlist.setWishes(wishlistService.getWishesFromWishlist(wishlistId));
+        model.addAttribute("wishlist", wishlist);
         return "showSpecificWishlist";
     }
 
     // List of users
     @GetMapping("/users")
-    public String showAllUsers(Model model) {
+    public String showAllUsers(Model model){
         model.addAttribute("users", userService.getAllUsers());
         return "showUsers";
     }
 
+
     // Specific user
     @GetMapping("/users/{userId}")
-    public String showSpecificUser(@PathVariable int userId, Model model) {
-        model.addAttribute("user", userService.getUser(userId));
+    public String showSpecificUser(@PathVariable int userId, Model model){
+        User user = userService.getUserFromId(userId);
+        model.addAttribute("user", user);
+        model.addAttribute("usersLists", wishlistService.allWishlistsForUser(userId));
         return "showSpecificUser";
     }
 
+
     // List of wishes
     @GetMapping("/wishes")
-    public String showWishes(Model model) {
+    public String showWishes(Model model){
         model.addAttribute("wishes", wishService.getWishes());
         return "showWishes";
     }
 
+
     // Specific wish
     @GetMapping("/wishes/{wishId}")
-    public String showWish(@PathVariable int wishId, Model model) {
+    public String showWish(@PathVariable int wishId, Model model){
         model.addAttribute("wish", wishService.getWish(wishId));
         return "showSpecificWish";
     }
+
 
     //add wish to wishlist
 
@@ -105,15 +129,60 @@ public class WishlistController {
         return "redirect:/wishy/users";
     }
 
-    @PostMapping("/wishes")
-    public String createWish(Wish wish) {
-        wishService.createWish(wish);
-        return "redirect:/wishy/wishes";
+    // Åbner siden til at oprette en ny ønskeliste
+    @GetMapping("/wishy/createWishlist/{userId}")
+    public String showCreateWishlistForm(@PathVariable int userId, Model model) {
+        User user = userService.getUserFromId(userId);
+        if (user == null) {
+            return "redirect:/wishy/login";
+        }
+        model.addAttribute("user", user);
+        return "createWishlist"; // Thymeleaf template
     }
 
-    @PostMapping("/wishlist")
-    public String createWishlist(Wishlist wishlist) {
-        wishlistService.createWishlist(wishlist);
-        return "redirect:/wishy/wishlists";
+    // Åbner siden til at oprette et nyt ønske
+    @GetMapping("/wishy/createWish/{wishlistId}")
+    public String showCreateWishForm(@PathVariable int wishlistId, Model model) {
+        model.addAttribute("wishlistId", wishlistId);
+        return "createWish"; // Thymeleaf template
     }
+
+
+
+
+    @PostMapping("/createWish")
+    public String createWish(@RequestParam String wishName,
+                             @RequestParam String description,
+                             @RequestParam double price,
+                             @RequestParam(required = false) String pictureLink,
+                             @RequestParam(required = false) String purchaseLink,
+                             @RequestParam int wishlistId) {
+
+        Wish wish = new Wish();
+        wish.setWishName(wishName);
+        wish.setDescription(description);
+        wish.setPrice(price);
+        wish.setPictureLink(pictureLink);
+        wish.setPurchaseLink(purchaseLink);
+
+        int wishId = wish.getWishId(); // returner ID fra repository
+        wishlistService.addWishToWishlist(wishId, wishlistId);
+
+        return "redirect:/wishy/wishlists/" + wishlistId;
+    }
+
+
+
+    @PostMapping("/createWishlist")
+    public String createWishlist(@RequestParam String wishlistName,
+                                 @RequestParam String description,
+                                 @RequestParam int ownerId) {
+        Wishlist wishlist = new Wishlist();
+        wishlist.setWishlistName(wishlistName);
+        wishlist.setDescription(description);
+        wishlist.setOwner(userService.getUserFromId(ownerId));
+        wishlistService.createWishlist(wishlist);
+        return "redirect:/wishy/homepage/" + ownerId;
+    }
+
 }

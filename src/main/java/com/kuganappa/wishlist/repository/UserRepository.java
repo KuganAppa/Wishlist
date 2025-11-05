@@ -1,6 +1,7 @@
 package com.kuganappa.wishlist.repository;
 
 import com.kuganappa.wishlist.model.User;
+import com.kuganappa.wishlist.repository.rowMappers.UserRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -15,21 +16,14 @@ import java.util.List;
 @Repository
 public class UserRepository {
     private final JdbcTemplate jdbc;
+    private final UserRowMapper rowMapper = new UserRowMapper();
 
     public UserRepository(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 
-    public final RowMapper<User> rowMapper = (rs, rowNum) ->
-            new User(
-                    rs.getString("userName"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getObject("dateOfBirth", LocalDate.class)
-            );
-
     public List<User> getAllUsers() {
-        return jdbc.query("SELECT * FROM users", rowMapper);
+        return jdbc.query("SELECT * FROM users",rowMapper);
     }
 
     public void createUser(User user) {

@@ -5,18 +5,17 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class UserRowMapper implements RowMapper<User> {
 
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         User user = new User();
-        user.setUserId(rs.getInt("userId"));
-        user.setUserName(rs.getString("userName"));
-        user.setEmail(rs.getString("email"));
+        user.setUserId(rs.getInt("userId")); // <- tjek at kolonnen hedder præcis sådan
+        user.setUserName(rs.getString("username"));
         user.setPassword(rs.getString("password"));
-        user.setDateOfBirth(rs.getDate("dateOfBirth").toLocalDate());
-
+        user.setDateOfBirth(rs.getObject("dateOfBirth", LocalDate.class));
         return user;
     }
 }

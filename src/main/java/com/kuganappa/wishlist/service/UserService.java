@@ -18,7 +18,7 @@ public class UserService {
         userRepository.createUser(user);
     }
 
-    public User getUser(int id) {
+    public User getUserFromId(int id) {
         return userRepository.getUserFromId(id);
     }
 

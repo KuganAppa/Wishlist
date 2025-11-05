@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="da">
-<head>
-    <meta charset="UTF-8">
-    <link th:href="@{/main.css}" rel="stylesheet">
-    <title>Title</title>
-</head>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<body>
+<div class="max-w-4xl mx-auto mt-10">
+    <h1 class="text-3xl font-bold mb-4" th:text="${wishlist.wishlistName}">Ønskeliste Navn</h1>
+    <p class="text-gray-600 mb-6" th:text="${wishlist.description}">Beskrivelse af ønskelisten</p>
+
+    <div class="mb-4 flex justify-between items-center">
+        <h2 class="text-2xl font-semibold">Ønsker</h2>
+        <a th:href="@{'/wishy/createWish?wishlistId=' + ${wishlist.wishlistId}}"
+           class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+            Tilføj nyt ønske
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div th:each="wish : ${wishlist.wishes}" class="bg-white shadow p-4 rounded">
+            <h3 class="text-xl font-bold" th:text="${wish.wishName}">Wish Navn</h3>
+            <p class="text-gray-600" th:text="${wish.description}">Beskrivelse</p>
+            <p class="text-gray-800 font-semibold mt-2" th:text="'Pris: ' + ${wish.price} + ' kr'">Pris</p>
+            <a th:if="${wish.purchaseLink}" th:href="${wish.purchaseLink}" target="_blank"
+               class="text-blue-600 hover:underline mt-2 inline-block">Køb her</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

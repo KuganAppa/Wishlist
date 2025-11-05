@@ -14,8 +14,8 @@ public class WishService {
         this.wishRepository = wishRepository;
     }
 
-    public void createWish(Wish wish) {
-        wishRepository.createWish(wish);
+    public int createWish(Wish wish) {
+        return wishRepository.createWish(wish);
     }
 
     public List<Wish> getWishes() {

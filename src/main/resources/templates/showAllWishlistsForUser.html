@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="da">
-<head>
-    <meta charset="UTF-8">
-    <link th:href="@{/main.css}" rel="stylesheet">
-    <title>My wishlist page</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <body>
-<ul>
-    <li th:each="wishlist : ${userWishlists}">
-        <span th:text="${wishlist.name}"></span>
-    </li>
-</ul>
+<div class="max-w-4xl mx-auto mt-10">
+    <h1 class="text-3xl font-bold mb-6" th:text="'Ønskelister for ' + ${user.userName}">Ønskelister</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div th:each="wishlist : ${usersLists}" class="bg-white shadow p-4 rounded">
+            <h3 class="text-xl font-bold" th:text="${wishlist.wishlistName}">Wishlist Navn</h3>
+            <p class="text-gray-600" th:text="${wishlist.description}">Beskrivelse</p>
+            <a th:href="@{'/wishy/wishlists/' + ${wishlist.wishlistId}}" class="text-blue-600 hover:underline mt-2 inline-block">Se ønsker</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

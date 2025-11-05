@@ -1,21 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="da">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/main.css}" rel="stylesheet">
     <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-<form th:action="@{/login}" method="post">
-    <label>Brugernavn:</label>
-    <input type="text" name="username" required>
+<div class="login-container">
+    <h2>Login</h2>
+    <form th:action="@{/wishy/login}" method="post">
+        <label for="username">Brugernavn</label>
+        <input type="text" id="username" name="username" required>
 
-    <label>Adgangskode:</label>
-    <input type="password" name="password" required>
+        <label for="password">Adgangskode</label>
+        <input type="password" id="password" name="password" required>
 
-    <button type="submit">Log ind</button>
+        <button type="submit">Log ind</button>
 
-    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
-</form>
+        <!-- Fejlmeddelelse -->
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+    </form>
+</div>
 </body>
 </html>

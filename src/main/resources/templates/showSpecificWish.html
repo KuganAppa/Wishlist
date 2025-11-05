@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="da">
-<head>
-    <meta charset="UTF-8">
-    <link th:href="@{/main.css}" rel="stylesheet">
-    <title>Title</title>
-</head>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<body>
+<div class="max-w-md mx-auto mt-10 bg-white shadow p-6 rounded-lg">
+    <h1 class="text-2xl font-bold mb-4" th:text="${wish.wishName}">Ønske Navn</h1>
+
+    <p class="text-gray-600 mb-2" th:text="${wish.description}">Beskrivelse</p>
+    <p class="text-gray-800 font-semibold mb-2" th:text="'Pris: ' + ${wish.price} + ' kr'">Pris</p>
+
+    <div th:if="${wish.pictureLink}">
+        <img th:src="${wish.pictureLink}" alt="Billede af ønske" class="w-full rounded mb-4">
+    </div>
+
+    <div th:if="${wish.purchaseLink}">
+        <a th:href="${wish.purchaseLink}" target="_blank"
+           class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 inline-block">
+            Køb her
+        </a>
+    </div>
+
+    <div class="mt-4">
+        <a href="/wishy/wishes" class="text-gray-700 hover:underline">Tilbage til alle ønsker</a>
+    </div>
+</div>
 </body>
 </html>
