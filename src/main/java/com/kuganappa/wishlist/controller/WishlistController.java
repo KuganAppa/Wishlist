@@ -53,6 +53,33 @@ public class WishlistController {
         }
     }
 
+    // Vis opret bruger side
+    @GetMapping("/register")
+    public String showRegisterForm(Model model) {
+        model.addAttribute("user", new User());
+        return "register"; // register.html
+    }
+
+    // POST: opret ny bruger
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute User user,
+                               @RequestParam String confirmPassword,
+                               Model model) {
+
+        if (userService.usernameExists(user.getUserName())) {
+            model.addAttribute("error", "Brugernavnet findes allerede!");
+            return "register";
+        }
+
+        if (userService.emailExists(user.getEmail())) {
+            model.addAttribute("error", "Brugernavnet findes allerede!");
+            return "register";
+        }
+
+        userService.createUser(user);
+        return "redirect:/wishy/login"; // redirect til login efter oprettelse
+    }
+
     @GetMapping("/homepage/{userId}")
     public String showHomepage(@PathVariable int userId, Model model) {
         User user = userService.getUserFromId(userId); // hent bruger

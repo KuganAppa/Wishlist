@@ -59,4 +59,10 @@ public class UserRepository {
                 "SELECT * FROM users WHERE userId = ?", rowMapper, userId);
         return list.isEmpty() ? null : list.getFirst();
     }
+
+    public User getUserFromEmail(String email) {
+        List<User> list = jdbc.query(
+                "SELECT * FROM users WHERE email = ?", rowMapper, email);
+        return list.isEmpty() ? null : list.getFirst();
+    }
 }
